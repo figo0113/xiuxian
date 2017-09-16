@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "name": "经验丹",
+    "type": "Consumable",
+    "quality": "Rare",
+    "description": "增加200经验",
+    "capacity": 99,
+    "buyPrice": 1000,
+    "sellPrice": 50,
+    "sprite": "item_1",
+    "function": 1,
+    "value": 200
+  },
+
+  {
+    "id": 2,
+    "name": "初级寿元丹",
+    "type": "Consumable",
+    "quality": "Rare",
+    "description": "增加2年寿命",
+    "capacity": 2,
+    "buyPrice": 2000,
+    "sellPrice": 50,
+    "sprite": "item_2",
+    "function": 2,
+    "value": 2
+  },
+
+  {
+    "id": 3,
+    "name": "炼丹材料",
+    "type": "Material ",
+    "quality": "Common",
+    "description": "炼丹的材料",
+    "capacity": 5,
+    "buyPrice": 500,
+    "sellPrice": 50,
+    "sprite": "item_3",
+    "function": 0,
+    "value": 0
+  }
+]

@@ -1,0 +1,85 @@
+[
+  {
+    "ID": 1,
+    "name": "初出茅庐",
+    "entranceX": 0,
+    "entranceY":0,
+    "allNode": [
+      {
+        "name": "荒村",
+        "X": 0,
+        "Y": 0,
+        "up": true,
+        "down": false,
+        "left": false,
+        "right": true,
+        "includeNPC": [
+          1,
+          2
+        ],
+        "includeMonster": [
+          1
+        ],
+        "includeCollection": [
+          1,2
+        ]
+      },
+      {
+        "name": "村北口",
+        "X": 0,
+        "Y": 1,
+        "up": false,
+        "down": true,
+        "left": true,
+        "right": false,
+        "includeNPC": [
+          1
+        ],
+       "includeMonster": [
+          2
+        ],
+        "includeCollection": [
+          1
+        ]
+      },
+      {
+        "name": "山洞",
+        "X": -1,
+        "Y": 1,
+        "up": false,
+        "down": false,
+        "left": false,
+        "right": true,
+        "includeNPC": [
+
+        ],
+        "includeMonster": [
+          1,
+          1,
+          3
+        ]
+        ,
+        "includeCollection": [
+          3,3
+        ]
+      },
+       {
+        "name": "树林",
+        "X": 1,
+        "Y": 0,
+        "up": false,
+        "down": false,
+        "left": true,
+        "right": false,
+        "includeNPC": [
+          2
+        ],
+        "includeMonster": [
+          2,3
+        ],
+        "includeCollection": [          
+        ]
+      }
+    ]
+  }
+]
