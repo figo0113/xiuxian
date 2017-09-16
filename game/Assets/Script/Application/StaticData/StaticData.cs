@@ -168,15 +168,18 @@ public class StaticData : Singleton<StaticData>
                     int value = (int)(temp["value"].n);
                     item = new Consumable(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite, function, value);
                     break;
-                /*case Item.ItemType.Equipment:
-                    //
-                    int strength = (int)temp["strength"].n;
-                    int intellect = (int)temp["intellect"].n;
-                    int agility = (int)temp["agility"].n;
-                    int stamina = (int)temp["stamina"].n;
+                case Item.ItemType.Equipment:
                     Equipment.EquipmentType equipType = (Equipment.EquipmentType)System.Enum.Parse(typeof(Equipment.EquipmentType), temp["equipType"].str);
-                    item = new Equipment(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite, strength, intellect, agility, stamina, equipType);
-                    break;*/
+                    JSONObject equipProperty = temp["equipProperty"];
+                    int[] property = new int[21];
+                    int i = 0;
+                    foreach (JSONObject temp2 in equipProperty.list)
+                    {
+                        property[i] = (int)temp2.n;
+                        i++;
+                    }
+                    item = new Equipment(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite, property, equipType);
+                    break;
                 case Item.ItemType.Material:
                     //
                     item = new Material(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite);

@@ -32,7 +32,10 @@ public class UIBackPack : View
             counttxt.text = gridInfo.Count.ToString();
 
             Text destxt = grid.transform.Find("Des").GetComponent<Text>();
-            destxt.text = gridInfo.Item.Description;
+            if (gridInfo.Item.Type == Item.ItemType.Equipment)
+                destxt.text = gridInfo.Item.GetPropertyText();
+            else
+                destxt.text = gridInfo.Item.Description;
 
             Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
             string path = "Icon/Item/" + gridInfo.Item.Sprite;
@@ -55,7 +58,10 @@ public class UIBackPack : View
         counttxt.text = count.ToString();
 
         Text destxt = grid.transform.Find("Des").GetComponent<Text>();
-        destxt.text = item.Description;
+        if (item.Type == Item.ItemType.Equipment)
+            destxt.text = item.GetPropertyText();
+        else
+            destxt.text = item.Description;
 
         Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
         string path = "Icon/Item/" + item.Sprite;
@@ -84,9 +90,6 @@ public class UIBackPack : View
        switch (eventName)
         {
             case Consts.E_EnterScene:
-                SceneArgs e = data as SceneArgs;
-                int scenceID = e.SceneIndex;
-                if(scenceID == 2)
                 initialize();
                 break;
             case Consts.E_AddItem:
@@ -119,7 +122,7 @@ public class UIBackPack : View
         GameModel gm = GetModel<GameModel>();
         foreach (BackpackGrid gridInfo in gm.Backpack)
         {
-            if (gridInfo.Item.Type != Item.ItemType.Material)
+            if (gridInfo.Item.Type != Item.ItemType.Equipment)
             {
                 int index = gm.Backpack.IndexOf(gridInfo);
                 GameObject go = GridGroup.transform.GetChild(index).gameObject;
@@ -137,7 +140,7 @@ public class UIBackPack : View
         GameModel gm = GetModel<GameModel>();
         foreach (BackpackGrid gridInfo in gm.Backpack)
         {
-            if (gridInfo.Item.Type == Item.ItemType.Material)
+            if (gridInfo.Item.Type == Item.ItemType.Equipment)
             {
                 int index = gm.Backpack.IndexOf(gridInfo);
                 GameObject go = GridGroup.transform.GetChild(index).gameObject;

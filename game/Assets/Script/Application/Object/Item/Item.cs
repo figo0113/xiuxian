@@ -89,4 +89,8 @@ public class Item  {
         string text = string.Format("<color={4}>{0}</color>\n<size=10><color=green>购买价格：{1} 出售价格：{2}</color></size>\n<color=yellow><size=10>{3}</size></color>", Name, BuyPrice, SellPrice, Description, color);
         return text;
     }
+    public virtual string GetPropertyText()
+    {
+        return "";
+    }
 }

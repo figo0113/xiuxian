@@ -39,5 +39,21 @@
     "sprite": "item_3",
     "function": 0,
     "value": 0
+  },
+  
+  {
+    "id": 4,
+    "name": "赤焰甲",
+    "type": "Equipment ",
+    "quality": "Epic",
+    "description": "太清门研制的火系防具，可大量提升火防",
+    "capacity": 5,
+    "buyPrice": 500,
+    "sellPrice": 50,
+    "sprite": "item_2",
+    "function": 0,
+    "value": 0,
+	"equipType":"Armor",
+	"equipProperty":[0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,20,0,0]
   }
 ]

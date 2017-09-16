@@ -71,6 +71,9 @@ public class UIHome : View {
     {
         //GameModel gm = GetModel<GameModel>();
         gm.PickupItem(1);
+        gm.PickupItem(2);
+        gm.PickupItem(3);
+        gm.PickupItem(4);
         IOHelper.SetData(Consts.saveFileName, gm);
     }
     public void DazuoiClick() //打坐测试 获得道具2
