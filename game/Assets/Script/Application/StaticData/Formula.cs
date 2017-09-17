@@ -23,30 +23,60 @@ public static class Formula  {
         if (D.Hp < 0)
             D.Hp = 0;
     }
-
-    public static int DropItem(List<Drop> dropList,int luck)
+    public static int DropItem(List<Drop> dropList, int luck)
     {
-        int sumWeight=0;
-        int itemID =0;
-        if (dropList == null)
+        List<int> weight = new List<int>();
+        List<int> maxWeight = new List<int>();
+
+        int luckWeight = 0;
+        int sumWeight = 0;
+        int itemID = 0;
+        if (dropList.Count == 0)
             return 0;
+
         foreach (Drop drop in dropList)
-        {            
-            sumWeight += drop.weight;
-            drop.maxWeight = sumWeight;
+        {
+            weight.Add(drop.weight);
+        }
+        int MinWeight = weight.Min(); //最小权值; 
+
+        luckWeight = (luck - 20) * 100;
+        luckWeight = Mathf.Clamp(luckWeight, 0, 8000); //幸运值转化的权重为0--8000，暂定
+        Debug.Log("幸运权值=" + luckWeight);
+
+        for (int i = 0; i < dropList.Count; i++)
+        {
+            Debug.Log("初始权值=" + weight[i]);
+            if (luckWeight > weight[i] - MinWeight)
+            {
+                luckWeight = luckWeight - weight[i] + MinWeight;
+                weight[i] = MinWeight;
+            }
+            else
+            {
+                weight[i] = weight[i] - luckWeight;
+                luckWeight = 0;
+            }
+            sumWeight += weight[i];
+            maxWeight.Add(sumWeight);
+            Debug.Log("加成后权值=" + weight[i] + "," + "累积权值=" + maxWeight[i]);
         }
 
         int rand = Random.Range(0, sumWeight);
-        foreach (Drop drop in dropList)
+        Debug.Log("随机数=" + rand);
+        for (int i = 0; i < dropList.Count; i++)
         {
-            if (rand > drop.maxWeight)
+            if (rand >= maxWeight[i])
+            {
                 continue;
+            }
             else
             {
-                itemID = drop.id;
+                itemID = dropList[i].id;
+                Debug.Log("掉落区间=" + i);
                 break;
             }
         }
-        return itemID;        
+        return itemID;
     }
 }
