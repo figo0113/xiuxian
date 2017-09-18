@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public static class Formula  {
 
@@ -23,15 +24,16 @@ public static class Formula  {
         if (D.Hp < 0)
             D.Hp = 0;
     }
-    public static int DropItem(List<Drop> dropList, int luck)
+
+    public static int DropItem(List<Drop> dropList,int luck)
     {
         List<int> weight = new List<int>();
         List<int> maxWeight = new List<int>();
 
         int luckWeight = 0;
-        int sumWeight = 0;
-        int itemID = 0;
-        if (dropList.Count == 0)
+        int sumWeight=0;
+        int itemID =0;
+        if (dropList.Count==0)
             return 0;
 
         foreach (Drop drop in dropList)
@@ -44,24 +46,24 @@ public static class Formula  {
         luckWeight = Mathf.Clamp(luckWeight, 0, 8000); //幸运值转化的权重为0--8000，暂定
         Debug.Log("幸运权值=" + luckWeight);
 
-        for (int i = 0; i < dropList.Count; i++)
+        for (int i = 0; i< dropList.Count; i++)
         {
             Debug.Log("初始权值=" + weight[i]);
             if (luckWeight > weight[i] - MinWeight)
-            {
+            {                
                 luckWeight = luckWeight - weight[i] + MinWeight;
                 weight[i] = MinWeight;
             }
             else
-            {
+            {                
                 weight[i] = weight[i] - luckWeight;
                 luckWeight = 0;
-            }
+            }                                 
             sumWeight += weight[i];
-            maxWeight.Add(sumWeight);
-            Debug.Log("加成后权值=" + weight[i] + "," + "累积权值=" + maxWeight[i]);
+            maxWeight.Add(sumWeight) ;
+            Debug.Log("加成后权值="+weight[i]+","+"累积权值="+maxWeight[i]);
         }
-
+        
         int rand = Random.Range(0, sumWeight);
         Debug.Log("随机数=" + rand);
         for (int i = 0; i < dropList.Count; i++)
@@ -77,6 +79,6 @@ public static class Formula  {
                 break;
             }
         }
-        return itemID;
+        return itemID;        
     }
 }
