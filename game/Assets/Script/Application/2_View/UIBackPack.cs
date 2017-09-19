@@ -26,16 +26,23 @@ public class UIBackPack : View
             grid.transform.parent = GridGroup.transform;
 
             Text nametxt = grid.transform.Find("Name").GetComponent<Text>();
-            nametxt.text = gridInfo.Item.Name;
+            //nametxt.text = gridInfo.Item.Name;
+            nametxt.text = string.Format("<color={0}>{1}</color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name);
 
             Text counttxt = grid.transform.Find("Count").GetComponent<Text>();
-            counttxt.text = gridInfo.Count.ToString();
+            counttxt.text = "数量："+gridInfo.Count.ToString();
 
             Text destxt = grid.transform.Find("Des").GetComponent<Text>();
             if (gridInfo.Item.Type == Item.ItemType.Equipment)
+            {
+                nametxt.text = string.Format("<color={0}>{1}}\t<size=28>{2}</size></color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name, gridInfo.Item.GetItemTypeText());
                 destxt.text = gridInfo.Item.GetPropertyText();
+            }
             else
+            {
+                nametxt.text = string.Format("<color={0}>{1}</color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name);
                 destxt.text = gridInfo.Item.Description;
+            }
 
             Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
             string path = "Icon/Item/" + gridInfo.Item.Sprite;
@@ -52,16 +59,23 @@ public class UIBackPack : View
         grid.transform.parent = GridGroup.transform;
 
         Text nametxt = grid.transform.Find("Name").GetComponent<Text>();
-        nametxt.text = item.Name;
+        //nametxt.text = item.Name;
 
         Text counttxt = grid.transform.Find("Count").GetComponent<Text>();
-        counttxt.text = count.ToString();
+        counttxt.text = "数量：" + count.ToString();
 
+        
         Text destxt = grid.transform.Find("Des").GetComponent<Text>();
         if (item.Type == Item.ItemType.Equipment)
+        {
+            nametxt.text = string.Format("<color={0}>{1}\t<size=28>{2}</size></color>", item.GetQualityColor(), item.Name,item.GetItemTypeText());
             destxt.text = item.GetPropertyText();
+        }
         else
+        {
+            nametxt.text = string.Format("<color={0}>{1}</color>", item.GetQualityColor(), item.Name);
             destxt.text = item.Description;
+        }
 
         Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
         string path = "Icon/Item/" + item.Sprite;
@@ -72,9 +86,11 @@ public class UIBackPack : View
 
     void AddItemCount(int index)
     {
+        GameModel gm = GetModel<GameModel>();
         GameObject go = GridGroup.transform.GetChild(index).gameObject;
         Text counttxt = go.transform.Find("Count").GetComponent<Text>();
-        counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
+        //counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
+        counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
     }
 
 

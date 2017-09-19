@@ -93,4 +93,48 @@ public class Item  {
     {
         return "";
     }
+    public virtual string GetItemTypeText()
+    {
+        string itemType = "";
+        switch (Type)
+        {
+            case ItemType.Consumable:
+                itemType = "消耗品";
+                break;
+            case ItemType.Material:
+                itemType = "材料";
+                break;
+            case ItemType.Equipment:
+                itemType = "装备";
+                break;
+        }
+        return itemType;
+    }
+    public string GetQualityColor()
+    {
+        string color = "";
+        switch (Quality)
+        {
+            case ItemQuality.Common:
+                color = "white";
+                break;
+            case ItemQuality.Uncommon:
+                color = "lime";
+                break;
+            case ItemQuality.Rare:
+                color = "navy";
+                break;
+            case ItemQuality.Epic:
+                color = "magenta";
+                break;
+            case ItemQuality.Legendary:
+                color = "orange";
+                break;
+            case ItemQuality.Artifact:
+                color = "red";
+                break;
+        }
+
+        return color;
+    }
 }

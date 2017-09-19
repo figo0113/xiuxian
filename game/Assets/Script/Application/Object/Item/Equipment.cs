@@ -329,4 +329,27 @@ public class Equipment : Item {
 
         return propertyText;
     }
+    public override string GetItemTypeText()
+    {
+        string equipType = "";
+        switch (EquipType)
+        {
+            case EquipmentType.Weapon:
+                equipType = "『武器』";
+                break;
+            case EquipmentType.Headpiece:
+                equipType = "〖帽子〗";
+                break;
+            case EquipmentType.Armor:
+                equipType = "〖衣服〗";
+                break;
+            case EquipmentType.Boots:
+                equipType = "『靴子』";
+                break;
+            case EquipmentType.Jewelry:
+                equipType = "『饰品』";
+                break;
+        }
+        return equipType;
+    }
 }
