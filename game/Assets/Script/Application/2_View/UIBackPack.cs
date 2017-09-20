@@ -106,7 +106,11 @@ public class UIBackPack : View
        switch (eventName)
         {
             case Consts.E_EnterScene:
-                initialize();
+                SceneArgs e = data as SceneArgs;
+                int scenceID = e.SceneIndex;
+                if (scenceID == 2)
+                    initialize();
+                break;
                 break;
             case Consts.E_AddItem:
                 int itemid = (int)data;

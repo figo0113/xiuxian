@@ -63,9 +63,9 @@ public class StaticData : Singleton<StaticData>
 
         string des = getMonster(Monsterid).des;
         List<Drop> drop = getMonster(Monsterid).drop;
-
+        int gold = getMonster(Monsterid).gold;
         Monster monster = new Monster(id, name, sex, charm, luck, age, maxAge, trength, dingli, level, morality, killValue, 
-            attack, deffence, hit, miss, reduceHurt, increaseHurt,speed, hp, maxHp, des, drop);
+            attack, deffence, hit, miss, reduceHurt, increaseHurt,speed, hp, maxHp, des, drop,gold);
         return monster;
     }
 
@@ -246,7 +246,7 @@ public class StaticData : Singleton<StaticData>
 
             
             string des = temp["des"].str;
-
+            int gold = (int)temp["gold"].n;
             JSONObject drops = temp["drop"];
             List<Drop> dropList= new List<Drop>();
             foreach (JSONObject temp2 in drops.list)
@@ -255,7 +255,7 @@ public class StaticData : Singleton<StaticData>
                 int weight = (int)temp2["weight"].n;
                 dropList.Add(new Drop(id,weight));
             }
-            Monster monster = new Monster(id,name, sex, charm, luck, age, maxAge, trength, dingli, level, morality, killValue, attack, deffence, hit, miss, reduceHurt, increaseHurt, speed,hp, maxHp, des, dropList);
+            Monster monster = new Monster(id,name, sex, charm, luck, age, maxAge, trength, dingli, level, morality, killValue, attack, deffence, hit, miss, reduceHurt, increaseHurt, speed,hp, maxHp, des, dropList,gold);
 
             Monsters.Add(id, monster);
         }

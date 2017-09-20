@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIWin : View
 {
     int targetType;
     int targetID;
     public GameObject ItemPanel;
+    public Text MoneyText;
+    public Text NoItemText;
 
     public override string Name
     {
@@ -28,25 +31,31 @@ public class UIWin : View
                 targetID = e.ID;
                 this.gameObject.SetActive(true);
                 drop();
+                MoneyText.text = "仙玉+" + Game.Instance.StaticData.getMonster(targetID).gold;
                 break;
         }
     }
 
     void drop()
     {
+        NoItemText.gameObject.SetActive(false);
         GameModel gm = GetModel<GameModel>();
         if (targetType == 2)
         {
             Monster monster = Game.Instance.StaticData.getMonster(targetID);
             int itemID;
             itemID = Formula.DropItem(monster.drop,gm.player.Luck);
-            if(itemID ==0)
+            if (itemID == 0)
+            {
+                NoItemText.gameObject.SetActive(true);
                 return;
+            }
             gm.PickupItem2(itemID);
             GameObject Item = (GameObject)Instantiate(Resources.Load("Prefab/Item"));
             Item.transform.parent = ItemPanel.transform;
         }
     }
+
 
     void Update()
     {

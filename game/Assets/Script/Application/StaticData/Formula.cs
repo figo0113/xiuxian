@@ -44,11 +44,11 @@ public static class Formula  {
 
         luckWeight = (luck - 20) * 100;
         luckWeight = Mathf.Clamp(luckWeight, 0, 8000); //幸运值转化的权重为0--8000，暂定
-        Debug.Log("幸运权值=" + luckWeight);
+        //Debug.Log("幸运权值=" + luckWeight);
 
         for (int i = 0; i< dropList.Count; i++)
         {
-            Debug.Log("初始权值=" + weight[i]);
+            //Debug.Log("初始权值=" + weight[i]);
             if (luckWeight > weight[i] - MinWeight)
             {                
                 luckWeight = luckWeight - weight[i] + MinWeight;
@@ -61,11 +61,11 @@ public static class Formula  {
             }                                 
             sumWeight += weight[i];
             maxWeight.Add(sumWeight) ;
-            Debug.Log("加成后权值="+weight[i]+","+"累积权值="+maxWeight[i]);
+            //Debug.Log("加成后权值="+weight[i]+","+"累积权值="+maxWeight[i]);
         }
         
         int rand = Random.Range(0, sumWeight);
-        Debug.Log("随机数=" + rand);
+       // Debug.Log("随机数=" + rand);
         for (int i = 0; i < dropList.Count; i++)
         {
             if (rand >= maxWeight[i])
@@ -75,7 +75,7 @@ public static class Formula  {
             else
             {
                 itemID = dropList[i].id;
-                Debug.Log("掉落区间=" + i);
+                //Debug.Log("掉落区间=" + i);
                 break;
             }
         }

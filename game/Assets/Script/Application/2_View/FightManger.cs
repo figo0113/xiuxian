@@ -138,16 +138,20 @@ public class FightManger : View {
             if (p_fightRole.isAct)
             {
                 Attack(p_fightRole, t_fightRole);
+                
             }
 
             if (t_fightRole.isAct)
             {
                 Attack(t_fightRole, p_fightRole);
+                
             }
 
             if (p_fightRole.roleInfo.Hp <= 0)
             {
-                Game.Instance.LoadScene(2);
+                isend = true;
+                SendEvent(Consts.E_Lost);
+                //Game.Instance.LoadScene(2);
                 return;
             }
 

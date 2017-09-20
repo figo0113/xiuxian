@@ -49,6 +49,7 @@ class EnterSceneCommand : Controller
             case 3:
                 base.ReigisterView(GameObject.Find("FightManger").GetComponent<FightManger>());
                 base.ReigisterView(GameObject.Find("UIFight").transform.Find("WinBoundary").GetComponent<UIWin>());
+                base.ReigisterView(GameObject.Find("UIFight").transform.Find("LostBoundary").GetComponent<UILost>());
                 break;
         }
     }
