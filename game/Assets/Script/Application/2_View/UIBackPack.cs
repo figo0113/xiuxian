@@ -111,7 +111,6 @@ public class UIBackPack : View
                 if (scenceID == 2)
                     initialize();
                 break;
-                break;
             case Consts.E_AddItem:
                 int itemid = (int)data;
                 AddItem(itemid);

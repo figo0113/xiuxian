@@ -23,7 +23,10 @@ public class Player:Role  {
     private int aptitude_huo = 0;
     private int aptitude_tu = 0;
 
-    public Player(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue, int attack, int deffence, int hit, int miss, int reduceHurt, int increaseHurt, int speed,int hp, int maxHp) : base(name, sex, charm, luck, age, maxAge, trength, dingli, level, morality, killValue, attack, deffence,  hit,  miss,  reduceHurt,  increaseHurt, speed,hp, maxHp)
+    public Player(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue, int attack, int deffence, int hit, int miss, 
+        int reduceHurt, int increaseHurt, int speed,int hp, int maxHp, int attack_jin = 0, int defence_jin = 0,int attack_mu = 0, int defence_mu = 0, int attack_shui = 0, int defence_shui = 0, 
+        int attack_huo = 0, int defence_huo = 0, int attack_tu = 0, int defence_tu = 0) : base(name, sex, charm, luck, age, maxAge, trength, dingli, level, morality, killValue, attack, deffence,  hit,  
+            miss,  reduceHurt,  increaseHurt, speed,hp, maxHp,attack_jin,defence_jin,attack_mu,defence_mu,attack_shui,defence_shui,attack_huo,defence_huo,attack_tu,defence_tu)
     {
         this.maxExp = Game.Instance.StaticData.getMaxExp(level);
     }
