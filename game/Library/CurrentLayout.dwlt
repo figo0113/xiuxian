@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 583, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 11
+  controlID: 68
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 12
+  controlID: 69
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 13
+  controlID: 48
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -452,33 +452,33 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scence
+    - Assets/res/UI/FightUI
   m_ViewMode: 1
   m_StartGridSize: 65
   m_LastFolders:
-  - Assets/Scence
+  - Assets/res/UI/FightUI
   m_LastFoldersGridSize: 65
-  m_LastProjectPath: D:\xiuxian\xiuxian\game
+  m_LastProjectPath: E:\work\xiuxian\game
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 418}
-    m_SelectedIDs: 5c290000
-    m_LastClickedID: 10588
-    m_ExpandedIDs: 000000007825000058260000e427000080280000da290000f0290000f6290000922a0000c02a0000c62a0000d42a0000082c0000282c0000422c00006a2c00005a3700005c3700005e37000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 127}
+    m_SelectedIDs: 562a0000
+    m_LastClickedID: 10838
+    m_ExpandedIDs: 000000007625000056260000e22700007e280000d8290000ee290000f4290000902a0000be2a0000c42a0000d22a0000062c0000262c0000402c0000682c0000382d00003a2d00003c2d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 1_Modle
-      m_OriginalName: 1_Modle
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 10350
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
@@ -492,7 +492,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007825000058260000e427000080280000da290000f0290000f6290000922a0000c02a0000c62a0000d42a0000082c0000282c0000422c00006a2c00005a3700005c3700005e370000
+    m_ExpandedIDs: 000000007625000056260000e22700007e280000d8290000ee290000f4290000902a0000be2a0000c42a0000d22a0000062c0000262c0000402c0000682c0000382d00003a2d00003c2d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 5a220000c8220000cc2100006422000062220000ead9ffffd2220000d42200003c2600000a26000036270000705dffff0e270000b424000036260000b6240000762600000625000084230000e0250000fa21000058320000fc210000002200007625000072260000a62b00004a270000082200002a270000202e0000c8240000522800006825000058280000ac270000e824000000230000f2240000d45cffff36220000942b000038c7ffff6e280000fc260000f22b00002e260000b4320000ce2f0000b0a00400c65d0000583900003a280000f42d0000b22800001e260000fa2dffff583600001c2800004a280000082600001a290000182c00008c270000e4280000242b00000e9bffff982c0000ae260000aa79ffffc8290000522b00008a2b000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -608,9 +608,9 @@ MonoBehaviour:
     height: 622
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 242c0000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 369dffffbca8ffffeeb6ffff92c3ffff6ac7fffff4d6fffff6d6ffff7cd7ffffbed9ffff48e0ffff3ce9ffff1aeeffffe4fbffff00000000a82d0000202e0000302e00007c2f000076300000da31000094320000ae3200005e330000863300009e33000030340000383400004834000094340000c63400008a570000c2570000f6570000445b0000185c0000085d00009a5d00000c8200005c83000092860000c6860000148a0000d88b00006a8c00008aaa0000f0aa000076ad00006cae000030b00000c4b0000030b10000eee200004ae30000dae50000d0e6000094e8000028e90000
+    m_ExpandedIDs: dcfbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
