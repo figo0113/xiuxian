@@ -51,6 +51,7 @@ public static class Consts
     public const string V_UIPlayer = "V_UIPlayer";
     public const string V_UIWin = "V_UIWin";
     public const string V_UILost = "V_UILost";
+    public const string V_Skill = "V_Skill";
     //Controller
     public const string E_StartUp = "E_StartUp";
     public const string E_SaveData = "E_SaveData";
