@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1001,
+    "name": "青元剑诀",
+    "quality": "1",
+    "description": "青云门入门剑诀",
+    "sprite": "item_1",
+    "maxLevel": 20,
+    "target": 1,
+    "formula": "(A.atk-D.def)*(1+0.02*lv)+lv*20",
+    "buff": 0,
+    "cd": 3,
+    "Property": "0",
+    "PropertyValue": "0",
+    "initiativeDes": "对敌方造成一定伤害",
+    "passiveDes": ""
+  },
+
+  {
+    "id": 1002,
+    "name": "烈火刀法",
+    "quality": "2",
+    "description": "刀刀烈火",
+    "sprite": "item_2",
+    "maxLevel": 20,
+    "target": 1,
+    "formula": "(A.atk-D.def)*(1+0.03*lv)+lv*30",
+    "buff": 0,
+    "cd": 4,
+    "Property": "Atk",
+    "PropertyValue": "lv*2+10",
+    "initiativeDes": "对敌方造成可观伤害",
+    "passiveDes": "增加12点攻击"
+  },
+
+  {
+    "id": 1003,
+    "name": "天雷诀",
+    "quality": "3",
+    "description": "蕴含了雷电的奥秘",
+    "sprite": "item_3",
+    "maxLevel": 40,
+    "target": 1,
+    "formula": "(A.atk-D.def)*(1.2+0.02*lv)+lv*50",
+    "buff": 0,
+    "cd": 6,
+    "Property": "Def",
+    "PropertyValue": "lv*2+4",
+    "initiativeDes": "对敌方造成大量伤害，并晕眩2回合",
+    "passiveDes": "增加6点攻击"
+  }
+]
