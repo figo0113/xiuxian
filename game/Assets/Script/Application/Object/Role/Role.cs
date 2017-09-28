@@ -49,8 +49,7 @@ public class Role  {
 
     
 
-    //生活技能（炼丹、炼器等）todo(应该写到player里)
-    //技能列表（todo）
+    //生活技能（炼丹、炼器等）todo
 
     public Role(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue,
         int attack, int deffence, int hit, int miss, int reduceHurt, int increaseHurt, int speed, int hp,int maxHp,int attack_jin=0,int defence_jin = 0,

@@ -22,8 +22,6 @@ public class Player:Role  {
     private int aptitude_shui = 0;
     private int aptitude_huo = 0;
     private int aptitude_tu = 0;
-    //装备列表
-    //生活技能
 
     public Player(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue, int attack, int deffence, int hit, int miss, 
         int reduceHurt, int increaseHurt, int speed,int hp, int maxHp, int attack_jin = 0, int defence_jin = 0,int attack_mu = 0, int defence_mu = 0, int attack_shui = 0, int defence_shui = 0, 
