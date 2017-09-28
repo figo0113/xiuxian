@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIPlayer : View {
     public GameObject UIHome;
+    public GameObject PropertyWuxing;
 
     public Text nameTxt;
     public Text aptitudeTxt;
@@ -50,6 +51,7 @@ public class UIPlayer : View {
         gm.player.Upgrade += showLevel;
         gm.player.ExpChange += Player_ExpChange;
         UpadaInfo(gm.player);
+        Player_ExpChange(gm.player.Exp);
     }
 
     private void Player_PropertyChange(Player player)
@@ -97,5 +99,50 @@ public class UIPlayer : View {
     private void showLevel(int level)
     {
         LevelText.text = Game.Instance.StaticData.getLevelDes(level);
+    }
+    public void PropertyJinClick()
+    {
+        PropertyWuxing.gameObject.SetActive(true);
+        Text attackText = PropertyWuxing.transform.Find("attack").GetComponent<Text>();
+        Text defenceText= PropertyWuxing.transform.Find("defence").GetComponent<Text>();
+
+        attackText.text = "金属性攻击：" + gm.player.attack_jin.ToString();
+        defenceText.text = "金属性防御：" + gm.player.defence_jin.ToString();
+    }
+    public void PropertyMuClick()
+    {
+        PropertyWuxing.gameObject.SetActive(true);
+        Text attackText = PropertyWuxing.transform.Find("attack").GetComponent<Text>();
+        Text defenceText = PropertyWuxing.transform.Find("defence").GetComponent<Text>();
+
+        attackText.text = "木属性攻击：" + gm.player.attack_mu.ToString();
+        defenceText.text = "木属性防御：" + gm.player.defence_mu.ToString();
+    }
+    public void PropertyShuiClick()
+    {
+        PropertyWuxing.gameObject.SetActive(true);
+        Text attackText = PropertyWuxing.transform.Find("attack").GetComponent<Text>();
+        Text defenceText = PropertyWuxing.transform.Find("defence").GetComponent<Text>();
+
+        attackText.text = "水属性攻击：" + gm.player.attack_shui.ToString();
+        defenceText.text = "水属性防御：" + gm.player.defence_shui.ToString();
+    }
+    public void PropertyHuoClick()
+    {
+        PropertyWuxing.gameObject.SetActive(true);
+        Text attackText = PropertyWuxing.transform.Find("attack").GetComponent<Text>();
+        Text defenceText = PropertyWuxing.transform.Find("defence").GetComponent<Text>();
+
+        attackText.text = "火属性攻击：" + gm.player.attack_huo.ToString();
+        defenceText.text = "火属性防御：" + gm.player.defence_huo.ToString();
+    }
+    public void PropertyTuClick()
+    {
+        PropertyWuxing.gameObject.SetActive(true);
+        Text attackText = PropertyWuxing.transform.Find("attack").GetComponent<Text>();
+        Text defenceText = PropertyWuxing.transform.Find("defence").GetComponent<Text>();
+
+        attackText.text = "土属性攻击：" + gm.player.attack_tu.ToString();
+        defenceText.text = "土属性防御：" + gm.player.defence_tu.ToString();
     }
 }
