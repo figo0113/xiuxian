@@ -10,6 +10,7 @@ public class Player:Role  {
     public event Action<int> ExpChange;
 
     public event Action<Player> PropertyChange;
+    public event Action<Player> EquipmentChange;
 
     private const int maxlevel = 36; //测试等级 36级
 
@@ -22,6 +23,9 @@ public class Player:Role  {
     private int aptitude_shui = 0;
     private int aptitude_huo = 0;
     private int aptitude_tu = 0;
+    //装备列表
+    private Equipment[] playerEquipment = new Equipment[5];
+    //生活技能
 
     public Player(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue, int attack, int deffence, int hit, int miss, 
         int reduceHurt, int increaseHurt, int speed,int hp, int maxHp, int attack_jin = 0, int defence_jin = 0,int attack_mu = 0, int defence_mu = 0, int attack_shui = 0, int defence_shui = 0, 
@@ -404,5 +408,40 @@ public class Player:Role  {
 
             if (Upgrade != null)
                 Upgrade(Level);
+    }
+
+    public Equipment Equip(Equipment equip)
+    {
+        Equipment oldEquipment = null;//用于存放旧装备
+        switch (equip.EquipType)
+        {
+            case Equipment.EquipmentType.Weapon:
+                if (playerEquipment[0] !=null)
+                    oldEquipment = playerEquipment[0];
+                playerEquipment[0] = equip;
+                break;
+            case Equipment.EquipmentType.Headpiece:
+                if (playerEquipment[1] != null)
+                    oldEquipment = playerEquipment[1];
+                playerEquipment[1] = equip;
+                break;
+            case Equipment.EquipmentType.Armor:
+                if (playerEquipment[2] != null)
+                    oldEquipment = playerEquipment[2];
+                playerEquipment[2] = equip;
+                break;
+            case Equipment.EquipmentType.Boots:
+                if (playerEquipment[3] != null)
+                    oldEquipment = playerEquipment[3];
+                playerEquipment[3] = equip;
+                break;
+            case Equipment.EquipmentType.Jewelry:
+                if (playerEquipment[4] != null)
+                    oldEquipment = playerEquipment[4];
+                playerEquipment[4] = equip;
+                break;
+        }
+        EquipmentChange(this);
+        return oldEquipment;
     }
 }

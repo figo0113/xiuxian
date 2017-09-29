@@ -60,6 +60,11 @@ public class Equipment : Item {
     /// </summary>
     public EquipmentType EquipType { get; set; }
 
+    public Equipment()
+    {
+
+    }
+
     public Equipment(int id, string name, ItemType type, ItemQuality quality, string des, int capacity, int buyPrice, int sellPrice,string sprite,
         int maxHp,int charm,int dingli, int luck,int speed,int attack,int deffence,int hit,int miss,int increaseHurt,int reduceHurt,int attack_jin,
         int defence_jin, int attack_mu, int defence_mu, int attack_shui, int defence_shui, int attack_huo, int defence_huo, int attack_tu, int defence_tu, EquipmentType equipType)
@@ -92,6 +97,11 @@ public class Equipment : Item {
     int[] equipProperty, EquipmentType equipType)
     : base(id, name, type, quality, des, capacity, buyPrice, sellPrice, sprite)
     {
+        if (equipProperty.Length < 21)
+        {
+            Debug.Log("装备属性配置错误");
+            equipProperty = new int[21];
+        }
         this.MaxHp = equipProperty[0];
         this.Charm = equipProperty[1];
         this.Dingli = equipProperty[2];

@@ -63,6 +63,8 @@ public static class Consts
     public const string E_InitBackPack = "E_InitBackPack";//SceneArgs
     public const string E_AddItemCount = "E_AddItemCount";
     public const string E_AddItem = "E_AddItem";
+    public const string E_RemoveItem = "E_RemoveItem";
+    public const string E_RemoveItemCount = "E_RemoveItemCount";
     public const string E_StartFight = "E_StartFight";
     public const string E_ExitFight = "E_ExitFight";
     public const string E_EnterInstance = "E_EnterInstance";

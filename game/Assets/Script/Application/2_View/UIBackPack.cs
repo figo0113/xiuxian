@@ -93,12 +93,30 @@ public class UIBackPack : View
         counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
     }
 
+    void RemoveItem(int index)
+    {
+        GameModel gm = GetModel<GameModel>();
+        GameObject go = GridGroup.transform.GetChild(index).gameObject;
+        Destroy(go);
+    }
+
+    void RemoveItemCount(int index)
+    {
+        GameModel gm = GetModel<GameModel>();
+        GameObject go = GridGroup.transform.GetChild(index).gameObject;
+        Text counttxt = go.transform.Find("Count").GetComponent<Text>();
+        //counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
+        counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
+    }
+
 
     public override void RegisterEvents()
     {
         AttentionEvents.Add(Consts.E_EnterScene);
         AttentionEvents.Add(Consts.E_AddItem);
         AttentionEvents.Add(Consts.E_AddItemCount);
+        AttentionEvents.Add(Consts.E_RemoveItem);
+        AttentionEvents.Add(Consts.E_RemoveItemCount);
     }
 
     public override void HandleEvent(string eventName, object data)
@@ -119,6 +137,15 @@ public class UIBackPack : View
                 int count = (int)data;
                 AddItemCount(count);
                 break;
+            case Consts.E_RemoveItem:
+                int index = (int)data;
+                RemoveItem(index);
+                break;
+            case Consts.E_RemoveItemCount:
+                int c_index = (int)data;
+                RemoveItemCount(c_index);
+                break;
+
 
         }
 

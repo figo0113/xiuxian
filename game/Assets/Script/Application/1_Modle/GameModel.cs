@@ -32,6 +32,7 @@ public class GameModel : Model
 
     public Dictionary<int, NPC> NPCs= new Dictionary<int, NPC>();
     public List<BackpackGrid> Backpack = new List<BackpackGrid>(); //背包数据
+    public Dictionary<int, int> ItemCollect = new Dictionary<int, int>();
     public Player player; //角色数据
 
     public string saveFileName;
@@ -139,6 +140,11 @@ public class GameModel : Model
     public void PickupItem(int itemid)
     {
         Item targetItem = Game.Instance.StaticData.GetItem(itemid);
+        if (ItemCollect.ContainsKey(itemid))
+            ItemCollect[itemid]++;
+        else
+            ItemCollect.Add(itemid, 1);
+
         for(int i = 0; i< Backpack.Count; i++)
         {
             if (Backpack[i].Item.ID == itemid)//如果有相同物品
@@ -163,6 +169,11 @@ public class GameModel : Model
     public void PickupItem2(int itemid) //不在背包场景的时候添加道具
     {
         Item targetItem = Game.Instance.StaticData.GetItem(itemid);
+        if (ItemCollect.ContainsKey(itemid))
+            ItemCollect[itemid]++;
+        else
+            ItemCollect.Add(itemid, 1);
+
         for (int i = 0; i < Backpack.Count; i++)
         {
             if (Backpack[i].Item.ID == itemid)//如果有相同物品
@@ -184,6 +195,51 @@ public class GameModel : Model
         Backpack.Add(new BackpackGrid(targetItem, 1));
         //SendEvent(Consts.E_AddItem, itemid);
     }
+    public bool RemoveItem(int id,int removeNum)
+    {
+
+        if (ItemCollect[id] < removeNum)
+            return false;
+        //Item targetItem = Game.Instance.StaticData.GetItem(id);
+        //int itemRemoveNum = itemRemove[1];
+
+
+        for (int i = Backpack.Count; i >0; i--)
+        {
+            if (Backpack[i].Item.ID == id)
+            {
+                if(Backpack[i].Count> removeNum)
+                {
+                    Backpack[i].Count -= removeNum;
+                    //int[] message = new int[2] { i, itemRemoveNum };
+                    SendEvent(Consts.E_RemoveItemCount, i);
+                    break;
+                }
+                else
+                {
+                    removeNum -= Backpack[i].Count;
+                    Backpack.RemoveAt(i);
+                    SendEvent(Consts.E_RemoveItem, i);
+                    if (removeNum == 0)
+                        break;                     
+                }
+            }
+        }
+        return true;
+    }
+    public bool Equip(Equipment equip)
+    {
+        if (RemoveItem(equip.ID, 1))
+        {
+            Equipment oldequip = player.Equip(equip);
+            if (oldequip != null)
+                PickupItem(equip.ID);
+            return true;
+        }
+        else
+            return false;
+    }
+
     void ParseNPCJson()
     {
         
