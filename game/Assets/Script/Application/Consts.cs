@@ -52,6 +52,7 @@ public static class Consts
     public const string V_UIWin = "V_UIWin";
     public const string V_UILost = "V_UILost";
     public const string V_Skill = "V_Skill";
+    public const string V_ItemUseButton = "V_ItemUseButton";
     //Controller
     public const string E_StartUp = "E_StartUp";
     public const string E_SaveData = "E_SaveData";
@@ -71,6 +72,7 @@ public static class Consts
     public const string E_BackInstance = "E_BackInstance";
     public const string E_Win = "E_Win";
     public const string E_Lost = "E_Lost";
+    public const string E_ItemUse = "E_ItemUse";
     /*    public const string E_StartLevel = "E_StartLevel"; //StartLevelArgs
          public const string E_EndLevel = "E_EndLevel";//EndLevelArgs
 

@@ -204,7 +204,7 @@ public class GameModel : Model
         //int itemRemoveNum = itemRemove[1];
 
 
-        for (int i = Backpack.Count; i >0; i--)
+        for (int i = Backpack.Count-1; i >=0; i--)
         {
             if (Backpack[i].Item.ID == id)
             {
@@ -234,6 +234,25 @@ public class GameModel : Model
             Equipment oldequip = player.Equip(equip);
             if (oldequip != null)
                 PickupItem(equip.ID);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public bool UseItem(Consumable item,int num=1)
+    {
+        if (RemoveItem(item.ID, num))
+        {
+            switch (item.Function)
+            {
+                case 1://加经验
+                    player.Exp += item.Value * num;
+                    break;
+                case 2://加寿命
+                    player.MaxAge += item.Value * num;
+                    break;
+            }
             return true;
         }
         else

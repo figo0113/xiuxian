@@ -24,7 +24,7 @@ public class Player:Role  {
     private int aptitude_huo = 0;
     private int aptitude_tu = 0;
     //装备列表
-    private Equipment[] playerEquipment = new Equipment[5];
+    public Equipment[] playerEquipment = new Equipment[5];
     //生活技能
 
     public Player(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue, int attack, int deffence, int hit, int miss, 
@@ -401,6 +401,156 @@ public class Player:Role  {
         }
     }
 
+    public int Attack_jin
+    {
+        get
+        {
+            return attack_jin;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            attack_jin = value;
+        }
+    }
+
+    public int Defence_jin
+    {
+        get
+        {
+            return defence_jin;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            defence_jin = value;
+        }
+    }
+
+    public int Attack_mu
+    {
+        get
+        {
+            return attack_mu;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            attack_mu = value;
+        }
+    }
+
+    public int Defence_mu
+    {
+        get
+        {
+            return defence_mu;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            defence_mu = value;
+        }
+    }
+
+    public int Attack_shui
+    {
+        get
+        {
+            return attack_shui;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            attack_shui = value;
+        }
+    }
+
+    public int Defence_shui
+    {
+        get
+        {
+            return defence_shui;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            defence_shui = value;
+        }
+    }
+
+    public int Attack_huo
+    {
+        get
+        {
+            return attack_huo;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            attack_huo = value;
+        }
+    }
+
+    public int Defence_huo
+    {
+        get
+        {
+            return defence_huo;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            defence_huo = value;
+        }
+    }
+
+    public int Attack_tu
+    {
+        get
+        {
+            return attack_tu;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            attack_tu = value;
+        }
+    }
+
+    public int Defence_tu
+    {
+        get
+        {
+            return defence_tu;
+        }
+
+        set
+        {
+            if (PropertyChange != null)
+                PropertyChange(this);
+            defence_tu = value;
+        }
+    }
+
     private void upgrade()
     {
             this.Level++;
@@ -441,7 +591,86 @@ public class Player:Role  {
                 playerEquipment[4] = equip;
                 break;
         }
-        EquipmentChange(this);
+        if(EquipmentChange!=null)
+            EquipmentChange(this);
+        AddEquipProperty(equip, oldEquipment);
         return oldEquipment;
+    }
+
+    private void AddEquipProperty(Equipment equip,Equipment oldEquip=null)
+    {
+        if(oldEquip==null)
+        { 
+            MaxHp += equip.MaxHp;
+            Charm += equip.Charm;
+            Dingli += equip.Dingli;
+            Luck += equip.Luck;
+            Speed += equip.Speed;
+            Attack += equip.Attack;
+            Deffence += equip.Deffence;
+            Hit += equip.Hit;
+            Miss += equip.Miss;
+            IncreaseHurt += equip.IncreaseHurt;
+            ReduceHurt += equip.ReduceHurt;
+            Attack_jin += equip.Attack_jin;
+            Defence_jin += equip.Defence_jin;
+            Attack_mu += equip.Attack_mu;
+            Defence_mu += equip.Defence_mu;
+            Attack_shui += equip.Attack_shui;
+            Defence_shui += equip.Defence_shui;
+            Attack_huo += equip.Attack_huo;
+            Defence_huo += equip.Defence_huo;
+            Attack_tu += equip.Attack_tu;
+            Defence_tu += equip.Defence_tu;
+        }
+        else
+        {
+            MaxHp += equip.MaxHp - oldEquip.MaxHp;
+            Charm += equip.Charm - oldEquip.Charm;
+            Dingli += equip.Dingli - oldEquip.Dingli;
+            Luck += equip.Luck - oldEquip.Luck;
+            Speed += equip.Speed - oldEquip.Speed;
+            Attack += equip.Attack - oldEquip.Attack;
+            Deffence += equip.Deffence - oldEquip.Deffence;
+            Hit += equip.Hit - oldEquip.Hit;
+            Miss += equip.Miss - oldEquip.Miss;
+            IncreaseHurt += equip.IncreaseHurt - oldEquip.IncreaseHurt;
+            ReduceHurt += equip.ReduceHurt - oldEquip.ReduceHurt;
+            Attack_jin += equip.Attack_jin - oldEquip.Attack_jin;
+            Defence_jin += equip.Defence_jin - oldEquip.Defence_jin;
+            Attack_mu += equip.Attack_mu - oldEquip.Attack_mu;
+            Defence_mu += equip.Defence_mu - oldEquip.Defence_mu;
+            Attack_shui += equip.Attack_shui - oldEquip.Attack_shui;
+            Defence_shui += equip.Defence_shui - oldEquip.Defence_shui;
+            Attack_huo += equip.Attack_huo - oldEquip.Attack_huo;
+            Defence_huo += equip.Defence_huo - oldEquip.Defence_huo;
+            Attack_tu += equip.Attack_tu - oldEquip.Attack_tu;
+            Defence_tu += equip.Defence_tu - oldEquip.Defence_tu;
+        }
+    }
+
+    private void RemoveEquipProperty(Equipment equip)
+    {
+        MaxHp -= equip.MaxHp;
+        Charm -= equip.Charm;
+        Dingli -= equip.Dingli;
+        Luck -= equip.Luck;
+        Speed -= equip.Speed;
+        Attack -= equip.Attack;
+        Deffence -= equip.Deffence;
+        Hit -= equip.Hit;
+        Miss -= equip.Miss;
+        IncreaseHurt -= equip.IncreaseHurt;
+        ReduceHurt -= equip.ReduceHurt;
+        Attack_jin -= equip.Attack_jin;
+        Defence_jin -= equip.Defence_jin;
+        Attack_mu -= equip.Attack_mu;
+        Defence_mu -= equip.Defence_mu;
+        Attack_shui -= equip.Attack_shui;
+        Defence_shui -= equip.Defence_shui;
+        Attack_huo -= equip.Attack_huo;
+        Defence_huo -= equip.Defence_huo;
+        Attack_tu -= equip.Attack_tu;
+        Defence_tu -= equip.Defence_tu;
     }
 }

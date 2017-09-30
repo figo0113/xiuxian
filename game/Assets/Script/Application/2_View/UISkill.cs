@@ -52,7 +52,7 @@ public class UISkill : View
 
     void AddItem(int itemid,int count=1 )
     {
-        GameModel gm = GetModel<GameModel>();
+        //GameModel gm = GetModel<GameModel>();
         Item item = Game.Instance.StaticData.GetItem(itemid);
 
         GameObject grid = (GameObject)Instantiate(Resources.Load("Prefab/Grid"));

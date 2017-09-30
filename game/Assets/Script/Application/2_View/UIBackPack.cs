@@ -47,12 +47,28 @@ public class UIBackPack : View
             Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
             string path = "Icon/Item/" + gridInfo.Item.Sprite;
             Icon.sprite =Resources.Load<Sprite>(path);
+
+            Button useButton = grid.transform.Find("UseBtn").GetComponent<Button>();
+            Text useButtonText = useButton.GetComponent<Text>();
+            useButton.GetComponent<ItemUseButton>().itemID = gridInfo.Item.ID;
+            switch (gridInfo.Item.Type)
+            {
+                case Item.ItemType.Consumable:
+                    break;
+                case Item.ItemType.Equipment:
+                    useButtonText.text = "装备";
+                    break;
+                case Item.ItemType.Material:
+                    useButton.gameObject.SetActive(false);
+                    counttxt.transform.Translate(0f, 39f, 0f);
+                    break;
+            }
         }
     }
 
     void AddItem(int itemid,int count=1 )
     {
-        GameModel gm = GetModel<GameModel>();
+        //GameModel gm = GetModel<GameModel>();
         Item item = Game.Instance.StaticData.GetItem(itemid);
 
         GameObject grid = (GameObject)Instantiate(Resources.Load("Prefab/Grid"));
@@ -80,7 +96,22 @@ public class UIBackPack : View
         Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
         string path = "Icon/Item/" + item.Sprite;
         Icon.sprite = Resources.Load<Sprite>(path);
-       
+
+        Button useButton = grid.transform.Find("UseBtn").GetComponent<Button>();
+        Text useButtonText = useButton.transform.Find("Text").GetComponent<Text>();
+        useButton.GetComponent<ItemUseButton>().itemID = item.ID;
+        switch (item.Type)
+        {
+            case Item.ItemType.Consumable:
+                break;
+            case Item.ItemType.Equipment:
+                useButtonText.text = "装备";
+                break;
+            case Item.ItemType.Material:
+                useButton.gameObject.SetActive(false);
+                counttxt.transform.Translate(0f, 39f, 0f);
+                break;
+        }
 
     }
 
@@ -108,7 +139,26 @@ public class UIBackPack : View
         //counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
         counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
     }
+    void UseItem(int itemID)
+    {
+        GameModel gm = GetModel<GameModel>();
+        Item item = Game.Instance.StaticData.GetItem(itemID);
 
+        switch (item.Type)
+        {
+            case Item.ItemType.Consumable:
+                Consumable consumable = (Consumable)item;
+                gm.UseItem(consumable);
+                break;
+            case Item.ItemType.Equipment:
+                Equipment equip = (Equipment)item;
+                gm.Equip(equip);
+                break;
+            case Item.ItemType.Material:
+                break;
+        }
+
+    }
 
     public override void RegisterEvents()
     {
@@ -117,6 +167,7 @@ public class UIBackPack : View
         AttentionEvents.Add(Consts.E_AddItemCount);
         AttentionEvents.Add(Consts.E_RemoveItem);
         AttentionEvents.Add(Consts.E_RemoveItemCount);
+        AttentionEvents.Add(Consts.E_ItemUse);
     }
 
     public override void HandleEvent(string eventName, object data)
@@ -144,6 +195,10 @@ public class UIBackPack : View
             case Consts.E_RemoveItemCount:
                 int c_index = (int)data;
                 RemoveItemCount(c_index);
+                break;
+            case Consts.E_ItemUse:
+                int useid = (int)data;
+                UseItem(useid);
                 break;
 
 

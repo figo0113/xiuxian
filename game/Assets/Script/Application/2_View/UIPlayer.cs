@@ -8,6 +8,9 @@ public class UIPlayer : View {
     public GameObject UIHome;
     public GameObject PropertyWuxing;
 
+    public GameObject[] EquipmentIcon;
+
+
     public Text nameTxt;
     public Text aptitudeTxt;
     public Text schoolTxt;
@@ -50,8 +53,10 @@ public class UIPlayer : View {
         gm.player.PropertyChange += Player_PropertyChange;
         gm.player.Upgrade += showLevel;
         gm.player.ExpChange += Player_ExpChange;
+        gm.player.EquipmentChange += Player_EquipmentChange;
         UpadaInfo(gm.player);
         Player_ExpChange(gm.player.Exp);
+        Player_EquipmentChange(gm.player);
     }
 
     private void Player_PropertyChange(Player player)
@@ -80,6 +85,21 @@ public class UIPlayer : View {
         MissTxt.text = (player.Miss / 100).ToString() + "%";
         ReduceHurtTxt.text = (player.ReduceHurt / 100).ToString() + "%";
 
+    }
+    private void Player_EquipmentChange(Player player)
+    {
+        for(int i=0;i<EquipmentIcon.Length;i++)
+        {
+            if (player.playerEquipment[i] != null)
+            {
+                EquipmentIcon[i].SetActive(true);
+                Image Icon = EquipmentIcon[i].GetComponent<Image>();
+                string path = "Icon/Item/" + player.playerEquipment[i].Sprite;
+                Icon.sprite = Resources.Load<Sprite>(path);
+            }
+            else
+                EquipmentIcon[i].SetActive(false);
+        }
     }
 
     public void BackClick()
