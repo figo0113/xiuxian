@@ -157,6 +157,8 @@ public class UIBackPack : View
             case Item.ItemType.Material:
                 break;
         }
+        //IOHelper.SetData(Consts.saveFileName, gm);
+
 
     }
 
