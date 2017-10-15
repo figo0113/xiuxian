@@ -33,6 +33,7 @@ public class GameModel : Model
     public Dictionary<int, NPC> NPCs= new Dictionary<int, NPC>();
     public List<BackpackGrid> Backpack = new List<BackpackGrid>(); //背包数据
     public Dictionary<int, int> ItemCollect = new Dictionary<int, int>();
+    public Dictionary<int,int>m_Skill = new Dictionary<int, int>(); //已经学习的技能  技能ID，技能等级
     public Player player; //角色数据
 
     public string saveFileName;
@@ -123,7 +124,7 @@ public class GameModel : Model
             
             GameModel gm = (GameModel)IOHelper.GetData(Consts.saveFileName, typeof(GameModel));
             MVC.RegisterModel(gm);
-            //Debug.Log(gm.isInstance);
+            
             if (gm.IsInstance)
             {
                 MapModel mm = GetModel<MapModel>();
@@ -257,6 +258,18 @@ public class GameModel : Model
         }
         else
             return false;
+    }
+
+    public void studySkill(int id)
+    {
+        Skill skill = Game.Instance.StaticData.getSkill(id);
+        if (!m_Skill.ContainsKey(id))
+            m_Skill.Add(id, 1);
+        else
+            if (m_Skill[id] < skill.maxLevel)
+            m_Skill[id]++;
+        else
+            Debug.Log("技能等级已满");
     }
 
     void ParseNPCJson()

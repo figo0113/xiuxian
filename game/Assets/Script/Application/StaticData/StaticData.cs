@@ -10,7 +10,7 @@ public class StaticData : Singleton<StaticData>
      Dictionary<int, Item> Items = new Dictionary<int, Item>();
      Dictionary<int, Level> Level = new Dictionary<int, Level>();
      Dictionary<int, Monster> Monsters = new Dictionary<int, Monster>();
-
+     Dictionary<int, Skill> Skills = new Dictionary<int, Skill>();
 
     protected override void Awake()
     {
@@ -19,6 +19,7 @@ public class StaticData : Singleton<StaticData>
         ParseItemJson();
         ParseLevelJson();
         ParseMonsterJson();
+        ParseSkillJson();
     }
 
     public int getMaxExp(int level)
@@ -29,6 +30,10 @@ public class StaticData : Singleton<StaticData>
     public Monster getMonster(int id)
     {
         return Monsters[id];
+    }
+    public Skill getSkill(int id)
+    {
+        return Skills[id];
     }
 
     public Monster SpawnMonster(int Monsterid)
@@ -258,6 +263,36 @@ public class StaticData : Singleton<StaticData>
             Monster monster = new Monster(id,name, sex, charm, luck, age, maxAge, trength, dingli, level, morality, killValue, attack, deffence, hit, miss, reduceHurt, increaseHurt, speed,hp, maxHp, des, dropList,gold);
 
             Monsters.Add(id, monster);
+        }
+    }
+
+    void ParseSkillJson()
+    {
+
+        TextAsset skillText = Resources.Load<TextAsset>("Skill");
+        string iskillJson = skillText.text;//技能信息的Json格式
+        JSONObject j = new JSONObject(iskillJson);
+        foreach (JSONObject temp in j.list)
+        {
+            int id = (int)temp["id"].n;
+            string name = temp["name"].str;
+            int quality = (int)temp["quality"].n;
+            string sprite = temp["sprite"].str;
+            int maxLevel = (int)temp["maxLevel"].n; ;
+            int trigger=(int)temp["trigger"].n; ;
+            int tProbability=(int)temp["tProbability"].n; ;
+            int target=(int)temp["target"].n; ;
+            string formula = temp["formula"].str;
+            int buff=(int)temp["buff"].n; ;
+            int cd= (int)temp["cd"].n; ;
+            string Property = temp["Property"].str;
+            string PropertyValue = temp["PropertyValue"].str;
+            string initiativeDes = temp["initiativeDes"].str;
+            string passiveDes = temp["passiveDes"].str;
+
+            Skill m_Skill = new Skill(id, name, quality, sprite, maxLevel,  trigger, tProbability, target, formula, buff, cd, 
+                                       Property, PropertyValue, initiativeDes, passiveDes);
+            Skills.Add(id, m_Skill);
         }
     }
 
