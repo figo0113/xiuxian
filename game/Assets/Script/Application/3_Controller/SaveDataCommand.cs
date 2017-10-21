@@ -18,5 +18,9 @@ public class SaveDataCommand : Controller
             gm.m_Map = mm.m_Map;
             IOHelper.SetData(Consts.saveFileName, gm);
         }
+        else
+        {
+            IOHelper.SetData(Consts.saveFileName, gm);
+        }
     }
 }

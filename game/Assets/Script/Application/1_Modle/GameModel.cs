@@ -118,6 +118,7 @@ public class GameModel : Model
             Gold = 1000;//初始金币                      
             ParseNPCJson(); //NPC初始化
             player = new Player("小小",1,80,100,15,100,80,80,1,50,0,100,40,9500,500,0,0,120,500,500);
+            m_Skill.Add(1001,1);
         }
         else
         {

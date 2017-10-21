@@ -10,7 +10,7 @@ public class UIFounctionBtn : View
     public GameObject UIMainMap;
     public GameObject NodeMap;
     public GameObject UIPlayer;
-
+    public GameObject UISkill;
 
     GameModel gm;
     public override string Name
@@ -30,6 +30,7 @@ public class UIFounctionBtn : View
     {
         if (!gm.IsInstance)
         {
+            UISkill.SetActive(false);
             UIPlayer.SetActive(false);
             UIBackPack.SetActive(false);
             UIHome.SetActive(false);
@@ -38,6 +39,7 @@ public class UIFounctionBtn : View
 }
         else
         {
+            UISkill.SetActive(false);
             UIBackPack.SetActive(false);
             UIHome.SetActive(false);
             NodeMap.SetActive(true);
@@ -49,6 +51,7 @@ public class UIFounctionBtn : View
     {
         if (!gm.IsInstance)
         {
+            UISkill.SetActive(false);
             UIPlayer.SetActive(false);
             UIMainMap.SetActive(false);
             UIBackPack.SetActive(false);
@@ -56,6 +59,7 @@ public class UIFounctionBtn : View
         }
         else
         {
+            UISkill.SetActive(false);
             UIPlayer.SetActive(false);
             NodeMap.SetActive(false);
             UIBackPack.SetActive(false);
@@ -66,6 +70,7 @@ public class UIFounctionBtn : View
     {
         if (!gm.IsInstance)
         {
+            UISkill.SetActive(false);
             UIPlayer.SetActive(false);
             UIMainMap.SetActive(false);
             UIHome.SetActive(false);
@@ -73,11 +78,22 @@ public class UIFounctionBtn : View
         }
         else
         {
+            UISkill.SetActive(false);
             UIPlayer.SetActive(false);
             NodeMap.SetActive(false);
             UIHome.SetActive(false);
             UIBackPack.SetActive(true);
         }
+    }
+
+    public void SkillClick()
+    {
+           UIPlayer.SetActive(false);
+            UIMainMap.SetActive(false);
+            UIHome.SetActive(false);
+            UIBackPack.SetActive(false);
+            UISkill.SetActive(true);
+
     }
 
     public override void HandleEvent(string eventName, object data)

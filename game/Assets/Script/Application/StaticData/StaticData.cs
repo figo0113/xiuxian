@@ -289,9 +289,10 @@ public class StaticData : Singleton<StaticData>
             string PropertyValue = temp["PropertyValue"].str;
             string initiativeDes = temp["initiativeDes"].str;
             string passiveDes = temp["passiveDes"].str;
+            int wx = (int)temp["wx"].n;
 
             Skill m_Skill = new Skill(id, name, quality, sprite, maxLevel,  trigger, tProbability, target, formula, buff, cd, 
-                                       Property, PropertyValue, initiativeDes, passiveDes);
+                                       Property, PropertyValue, initiativeDes, passiveDes,wx);
             Skills.Add(id, m_Skill);
         }
     }

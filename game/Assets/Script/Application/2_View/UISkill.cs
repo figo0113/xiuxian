@@ -20,77 +20,28 @@ public class UISkill : View
     void initialize()
     {
         GameModel gm = GetModel<GameModel>();
-        foreach (BackpackGrid gridInfo in gm.Backpack)
+        foreach (int key  in gm.m_Skill.Keys)
         {
-            GameObject grid = (GameObject)Instantiate(Resources.Load("Prefab/Grid"));
+            Skill skill = Game.Instance.StaticData.getSkill(key);
+            GameObject grid = (GameObject)Instantiate(Resources.Load("Prefab/SkillGrid"));
             grid.transform.parent = GridGroup.transform;
 
             Text nametxt = grid.transform.Find("Name").GetComponent<Text>();
-            //nametxt.text = gridInfo.Item.Name;
-            nametxt.text = string.Format("<color={0}>{1}</color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name);
+            nametxt.text = string.Format("<color={0}>{1}</color>", skill.GetQualityColor(), skill.name);
 
-            Text counttxt = grid.transform.Find("Count").GetComponent<Text>();
-            counttxt.text = "数量："+gridInfo.Count.ToString();
-
-            Text destxt = grid.transform.Find("Des").GetComponent<Text>();
-            if (gridInfo.Item.Type == Item.ItemType.Equipment)
-            {
-                nametxt.text = string.Format("<color={0}>{1}}\t<size=28>{2}</size></color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name, gridInfo.Item.GetItemTypeText());
-                destxt.text = gridInfo.Item.GetPropertyText();
-            }
-            else
-            {
-                nametxt.text = string.Format("<color={0}>{1}</color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name);
-                destxt.text = gridInfo.Item.Description;
-            }
-
+            Text counttxt = grid.transform.Find("Level").GetComponent<Text>();
+            counttxt.text = "等级："+ gm.m_Skill[key].ToString();
+            
             Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
-            string path = "Icon/Item/" + gridInfo.Item.Sprite;
+            string path = "Icon/Skill/" + skill.sprite;
             Icon.sprite =Resources.Load<Sprite>(path);
+
+            Image wx = grid.transform.Find("Icon/WxImage").GetComponent<Image>();
+            string path2 = "Icon/Wx/" + skill.GetWxString();
+            wx.sprite = Resources.Load<Sprite>(path2);
+
+
         }
-    }
-
-    void AddItem(int itemid,int count=1 )
-    {
-        //GameModel gm = GetModel<GameModel>();
-        Item item = Game.Instance.StaticData.GetItem(itemid);
-
-        GameObject grid = (GameObject)Instantiate(Resources.Load("Prefab/Grid"));
-        grid.transform.parent = GridGroup.transform;
-
-        Text nametxt = grid.transform.Find("Name").GetComponent<Text>();
-        //nametxt.text = item.Name;
-
-        Text counttxt = grid.transform.Find("Count").GetComponent<Text>();
-        counttxt.text = "数量：" + count.ToString();
-
-        
-        Text destxt = grid.transform.Find("Des").GetComponent<Text>();
-        if (item.Type == Item.ItemType.Equipment)
-        {
-            nametxt.text = string.Format("<color={0}>{1}\t<size=28>{2}</size></color>", item.GetQualityColor(), item.Name,item.GetItemTypeText());
-            destxt.text = item.GetPropertyText();
-        }
-        else
-        {
-            nametxt.text = string.Format("<color={0}>{1}</color>", item.GetQualityColor(), item.Name);
-            destxt.text = item.Description;
-        }
-
-        Image Icon = grid.transform.Find("Icon").GetComponent<Image>();
-        string path = "Icon/Item/" + item.Sprite;
-        Icon.sprite = Resources.Load<Sprite>(path);
-       
-
-    }
-
-    void AddItemCount(int index)
-    {
-        GameModel gm = GetModel<GameModel>();
-        GameObject go = GridGroup.transform.GetChild(index).gameObject;
-        Text counttxt = go.transform.Find("Count").GetComponent<Text>();
-        //counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
-        counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
     }
 
 
@@ -111,61 +62,9 @@ public class UISkill : View
                 if (scenceID == 2)
                     initialize();
                 break;
-            case Consts.E_AddItem:
-                int itemid = (int)data;
-                AddItem(itemid);
-                break;
-            case Consts.E_AddItemCount:
-                int count = (int)data;
-                AddItemCount(count);
-                break;
 
-        }
-
-       
-    }
-    public void BoltAllitem()
-    {
-        foreach (Transform child in GridGroup.transform)
-        {
-            child.gameObject.SetActive(true);
-        }
+        }     
     }
 
-    public void BoltEquipment()
-    {
-        foreach (Transform child in GridGroup.transform)
-        {
-            child.gameObject.SetActive(true);
-        }
-        GameModel gm = GetModel<GameModel>();
-        foreach (BackpackGrid gridInfo in gm.Backpack)
-        {
-            if (gridInfo.Item.Type != Item.ItemType.Equipment)
-            {
-                int index = gm.Backpack.IndexOf(gridInfo);
-                GameObject go = GridGroup.transform.GetChild(index).gameObject;
-                go.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    public void BoltOtheritem()
-    {
-        foreach (Transform child in GridGroup.transform)
-        {
-            child.gameObject.SetActive(true);
-        }
-        GameModel gm = GetModel<GameModel>();
-        foreach (BackpackGrid gridInfo in gm.Backpack)
-        {
-            if (gridInfo.Item.Type == Item.ItemType.Equipment)
-            {
-                int index = gm.Backpack.IndexOf(gridInfo);
-                GameObject go = GridGroup.transform.GetChild(index).gameObject;
-                go.gameObject.SetActive(false);
-            }
-        }
-    }
 
 }

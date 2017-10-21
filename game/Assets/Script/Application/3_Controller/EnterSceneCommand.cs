@@ -41,10 +41,10 @@ class EnterSceneCommand : Controller
                 base.ReigisterView(GameObject.Find("UIMain").transform.Find("NPCPanel").GetComponent<PanelManager>());
                 base.ReigisterView(GameObject.Find("UIMain").transform.Find("NPCPanel").GetComponent<NPCPanelInfo>());
                 base.ReigisterView(GameObject.Find("UIMain").transform.Find("MonsterPanel").GetComponent<MonsterPanelManager>());
-                //base.ReigisterView(GameObject.Find("UIMain").transform.Find("MonsterPanel").GetComponent<MonsterPanelInfo>());
                 base.ReigisterView(GameObject.Find("UIMain").transform.Find("CollectionPanel").GetComponent<CollectionPanelManager>());
                 //base.ReigisterView(GameObject.Find("UIMain").transform.Find("CollectionPanel").GetComponent<CollectionPanelInfo>());
                 base.ReigisterView(GameObject.Find("UIMain").transform.Find("NodeMap").GetComponent<NodeMap>());
+                base.ReigisterView(GameObject.Find("UIMain").transform.Find("UISkill").GetComponent<UISkill>());
                 break;
             case 3:
                 base.ReigisterView(GameObject.Find("FightManger").GetComponent<FightManger>());
