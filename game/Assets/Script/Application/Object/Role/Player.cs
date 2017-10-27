@@ -25,6 +25,8 @@ public class Player:Role  {
     private int aptitude_tu = 0;
     //装备列表
     public Equipment[] playerEquipment = new Equipment[5];
+    //装备属性
+    public Dictionary<string, int> EquipmentProperty = new Dictionary<string, int>();
     //生活技能
 
     public Player(string name, int sex, int charm, int luck, int age, int maxAge, int trength, int dingli, int level, int morality, int killValue, int attack, int deffence, int hit, int miss, 
@@ -33,6 +35,27 @@ public class Player:Role  {
             miss,  reduceHurt,  increaseHurt, speed,hp, maxHp,attack_jin,defence_jin,attack_mu,defence_mu,attack_shui,defence_shui,attack_huo,defence_huo,attack_tu,defence_tu)
     {
         this.maxExp = Game.Instance.StaticData.getMaxExp(level);
+        EquipmentProperty.Add("MaxHp", 0);
+        EquipmentProperty.Add("Charm", 0);
+        EquipmentProperty.Add("Dingli", 0);
+        EquipmentProperty.Add("Luck", 0);
+        EquipmentProperty.Add("Speed", 0);
+        EquipmentProperty.Add("Attack", 0);
+        EquipmentProperty.Add("Deffence", 0);
+        EquipmentProperty.Add("Hit", 0);
+        EquipmentProperty.Add("Miss", 0);
+        EquipmentProperty.Add("IncreaseHurt", 0);
+        EquipmentProperty.Add("ReduceHurt", 0);
+        EquipmentProperty.Add("Attack_jin", 0);
+        EquipmentProperty.Add("Defence_jin", 0);
+        EquipmentProperty.Add("Attack_mu", 0);
+        EquipmentProperty.Add("Defence_mu", 0);
+        EquipmentProperty.Add("Attack_shui", 0);
+        EquipmentProperty.Add("Defence_shui", 0);
+        EquipmentProperty.Add("Attack_huo", 0);
+        EquipmentProperty.Add("Defence_huo", 0);
+        EquipmentProperty.Add("Attack_tu", 0);
+        EquipmentProperty.Add("Defence_tu", 0);
     }
 
 
@@ -593,84 +616,301 @@ public class Player:Role  {
         }
         if(EquipmentChange!=null)
             EquipmentChange(this);
-        AddEquipProperty(equip, oldEquipment);
+        UpdateEquipProperty(equip, oldEquipment);
+        AddEquipProperty();
         return oldEquipment;
     }
 
-    private void AddEquipProperty(Equipment equip,Equipment oldEquip=null)
+    private void UpdateEquipProperty(Equipment equip,Equipment oldEquip=null)
     {
-        if(oldEquip==null)
-        { 
-            MaxHp += equip.MaxHp;
-            Charm += equip.Charm;
-            Dingli += equip.Dingli;
-            Luck += equip.Luck;
-            Speed += equip.Speed;
-            Attack += equip.Attack;
-            Deffence += equip.Deffence;
-            Hit += equip.Hit;
-            Miss += equip.Miss;
-            IncreaseHurt += equip.IncreaseHurt;
-            ReduceHurt += equip.ReduceHurt;
-            Attack_jin += equip.Attack_jin;
-            Defence_jin += equip.Defence_jin;
-            Attack_mu += equip.Attack_mu;
-            Defence_mu += equip.Defence_mu;
-            Attack_shui += equip.Attack_shui;
-            Defence_shui += equip.Defence_shui;
-            Attack_huo += equip.Attack_huo;
-            Defence_huo += equip.Defence_huo;
-            Attack_tu += equip.Attack_tu;
-            Defence_tu += equip.Defence_tu;
-        }
-        else
+        //如果有旧装备，减去旧装备属性
+        if (oldEquip!=null)
         {
-            MaxHp += equip.MaxHp - oldEquip.MaxHp;
-            Charm += equip.Charm - oldEquip.Charm;
-            Dingli += equip.Dingli - oldEquip.Dingli;
-            Luck += equip.Luck - oldEquip.Luck;
-            Speed += equip.Speed - oldEquip.Speed;
-            Attack += equip.Attack - oldEquip.Attack;
-            Deffence += equip.Deffence - oldEquip.Deffence;
-            Hit += equip.Hit - oldEquip.Hit;
-            Miss += equip.Miss - oldEquip.Miss;
-            IncreaseHurt += equip.IncreaseHurt - oldEquip.IncreaseHurt;
-            ReduceHurt += equip.ReduceHurt - oldEquip.ReduceHurt;
-            Attack_jin += equip.Attack_jin - oldEquip.Attack_jin;
-            Defence_jin += equip.Defence_jin - oldEquip.Defence_jin;
-            Attack_mu += equip.Attack_mu - oldEquip.Attack_mu;
-            Defence_mu += equip.Defence_mu - oldEquip.Defence_mu;
-            Attack_shui += equip.Attack_shui - oldEquip.Attack_shui;
-            Defence_shui += equip.Defence_shui - oldEquip.Defence_shui;
-            Attack_huo += equip.Attack_huo - oldEquip.Attack_huo;
-            Defence_huo += equip.Defence_huo - oldEquip.Defence_huo;
-            Attack_tu += equip.Attack_tu - oldEquip.Attack_tu;
-            Defence_tu += equip.Defence_tu - oldEquip.Defence_tu;
+            if (oldEquip.MaxHp != 0)
+            {
+                EquipmentProperty["MaxHp"] -= oldEquip.MaxHp;
+            }
+            if (oldEquip.Charm != 0)
+            {
+                EquipmentProperty["Charm"] -= oldEquip.Charm;
+            }
+            if (oldEquip.Dingli != 0)
+            {
+                EquipmentProperty["Dingli"] -= oldEquip.Dingli;
+            }
+            if (oldEquip.Luck != 0)
+            {
+                EquipmentProperty["Luck"] -= oldEquip.Luck;
+            }
+            if (oldEquip.Speed != 0)
+            {
+                EquipmentProperty["Speed"] -= oldEquip.Speed;
+            }
+            if (oldEquip.Attack != 0)
+            {
+                EquipmentProperty["Attack"] -= oldEquip.Attack;
+            }
+            if (oldEquip.Deffence != 0)
+            {
+                EquipmentProperty["Deffence"] -= oldEquip.Deffence;
+            }
+            if (oldEquip.Hit != 0)
+            {
+                EquipmentProperty["Hit"] -= oldEquip.Hit;
+            }
+            if (oldEquip.Miss != 0)
+            {
+                EquipmentProperty["Miss"] -= oldEquip.Miss;
+            }
+            if (oldEquip.IncreaseHurt != 0)
+            {
+                EquipmentProperty["IncreaseHurt"] -= oldEquip.IncreaseHurt;
+            }
+            if (oldEquip.ReduceHurt != 0)
+            {
+                EquipmentProperty["ReduceHurt"] -= oldEquip.ReduceHurt;
+            }
+            if (oldEquip.Attack_jin != 0)
+            {
+                EquipmentProperty["Attack_jin"] -= oldEquip.Attack_jin;
+            }
+            if (oldEquip.Defence_jin != 0)
+            {
+                EquipmentProperty["Defence_jin"] -= oldEquip.Defence_jin;
+            }
+            if (oldEquip.Attack_mu != 0)
+            {
+                EquipmentProperty["Attack_mu"] -= oldEquip.Attack_mu;
+            }
+            if (oldEquip.Defence_mu != 0)
+            {
+                EquipmentProperty["Defence_mu"] -= oldEquip.Defence_mu;
+            }
+            if (oldEquip.Attack_shui != 0)
+            {
+                EquipmentProperty["Attack_shui"] -= oldEquip.Attack_shui;
+            }
+            if (oldEquip.Defence_shui != 0)
+            {
+                EquipmentProperty["Defence_shui"] -= oldEquip.Defence_shui;
+            }
+            if (oldEquip.Attack_huo != 0)
+            {
+                EquipmentProperty["Attack_huo"] -= oldEquip.Attack_huo;
+            }
+            if (oldEquip.Defence_huo != 0)
+            {
+                EquipmentProperty["Defence_huo"] -= oldEquip.Defence_huo;
+            }
+            if (oldEquip.Attack_tu != 0)
+            {
+                EquipmentProperty["Attack_tu"] -= oldEquip.Attack_tu;
+            }
+            if (oldEquip.Defence_tu != 0)
+            {
+                EquipmentProperty["Defence_tu"] -= oldEquip.Defence_tu;
+            }
+        }
+
+        //加新装备属性
+        if (equip.MaxHp != 0)
+        {
+            EquipmentProperty["MaxHp"] += equip.MaxHp;
+        }
+        if (equip.Charm != 0)
+        {
+            EquipmentProperty["Charm"] += equip.Charm;
+        }
+        if (equip.Dingli != 0)
+        {
+            EquipmentProperty["Dingli"] += equip.Dingli;
+        }
+        if (equip.Luck != 0)
+        {
+            EquipmentProperty["Luck"] += equip.Luck;
+        }
+        if (equip.Speed != 0)
+        {
+            EquipmentProperty["Speed"] += equip.Speed;
+        }
+        if (equip.Attack != 0)
+        {
+            EquipmentProperty["Attack"] += equip.Attack;
+        }
+        if (equip.Deffence != 0)
+        {
+            EquipmentProperty["Deffence"] += equip.Deffence;
+        }
+        if (equip.Hit != 0)
+        {
+            EquipmentProperty["Hit"] += equip.Hit;
+        }
+        if (equip.Miss != 0)
+        {
+            EquipmentProperty["Miss"] += equip.Miss;
+        }
+        if (equip.IncreaseHurt != 0)
+        {
+            EquipmentProperty["IncreaseHurt"] += equip.IncreaseHurt;
+        }
+        if (equip.ReduceHurt != 0)
+        {
+            EquipmentProperty["ReduceHurt"] += equip.ReduceHurt;
+        }
+        if (equip.Attack_jin != 0)
+        {
+            EquipmentProperty["Attack_jin"] += equip.Attack_jin;
+        }
+        if (equip.Defence_jin != 0)
+        {
+            EquipmentProperty["Defence_jin"] += equip.Defence_jin;
+        }
+        if (equip.Attack_mu != 0)
+        {
+            EquipmentProperty["Attack_mu"] += equip.Attack_mu;
+        }
+        if (equip.Defence_mu != 0)
+        {
+            EquipmentProperty["Defence_mu"] += equip.Defence_mu;
+        }
+        if (equip.Attack_shui != 0)
+        {
+            EquipmentProperty["Attack_shui"] += equip.Attack_shui;
+        }
+        if (equip.Defence_shui != 0)
+        {
+            EquipmentProperty["Defence_shui"] += equip.Defence_shui;
+        }
+        if (equip.Attack_huo != 0)
+        {
+            EquipmentProperty["Attack_huo"] += equip.Attack_huo;
+        }
+        if (equip.Defence_huo != 0)
+        {
+            EquipmentProperty["Defence_huo"] += equip.Defence_huo;
+        }
+        if (equip.Attack_tu != 0)
+        {
+            EquipmentProperty["Attack_tu"] += equip.Attack_tu;
+        }
+        if (equip.Defence_tu != 0)
+        {
+            EquipmentProperty["Defence_tu"] += equip.Defence_tu;
         }
     }
 
     private void RemoveEquipProperty(Equipment equip)
     {
-        MaxHp -= equip.MaxHp;
-        Charm -= equip.Charm;
-        Dingli -= equip.Dingli;
-        Luck -= equip.Luck;
-        Speed -= equip.Speed;
-        Attack -= equip.Attack;
-        Deffence -= equip.Deffence;
-        Hit -= equip.Hit;
-        Miss -= equip.Miss;
-        IncreaseHurt -= equip.IncreaseHurt;
-        ReduceHurt -= equip.ReduceHurt;
-        Attack_jin -= equip.Attack_jin;
-        Defence_jin -= equip.Defence_jin;
-        Attack_mu -= equip.Attack_mu;
-        Defence_mu -= equip.Defence_mu;
-        Attack_shui -= equip.Attack_shui;
-        Defence_shui -= equip.Defence_shui;
-        Attack_huo -= equip.Attack_huo;
-        Defence_huo -= equip.Defence_huo;
-        Attack_tu -= equip.Attack_tu;
-        Defence_tu -= equip.Defence_tu;
+        if (equip.MaxHp != 0)
+        {
+            EquipmentProperty["MaxHp"] -= equip.MaxHp;
+        }
+        if (equip.Charm != 0)
+        {
+            EquipmentProperty["Charm"] -= equip.Charm;
+        }
+        if (equip.Dingli != 0)
+        {
+            EquipmentProperty["Dingli"] -= equip.Dingli;
+        }
+        if (equip.Luck != 0)
+        {
+            EquipmentProperty["Luck"] -= equip.Luck;
+        }
+        if (equip.Speed != 0)
+        {
+            EquipmentProperty["Speed"] -= equip.Speed;
+        }
+        if (equip.Attack != 0)
+        {
+            EquipmentProperty["Attack"] -= equip.Attack;
+        }
+        if (equip.Deffence != 0)
+        {
+            EquipmentProperty["Deffence"] -= equip.Deffence;
+        }
+        if (equip.Hit != 0)
+        {
+            EquipmentProperty["Hit"] -= equip.Hit;
+        }
+        if (equip.Miss != 0)
+        {
+            EquipmentProperty["Miss"] -= equip.Miss;
+        }
+        if (equip.IncreaseHurt != 0)
+        {
+            EquipmentProperty["IncreaseHurt"] -= equip.IncreaseHurt;
+        }
+        if (equip.ReduceHurt != 0)
+        {
+            EquipmentProperty["ReduceHurt"] -= equip.ReduceHurt;
+        }
+        if (equip.Attack_jin != 0)
+        {
+            EquipmentProperty["Attack_jin"] -= equip.Attack_jin;
+        }
+        if (equip.Defence_jin != 0)
+        {
+            EquipmentProperty["Defence_jin"] -= equip.Defence_jin;
+        }
+        if (equip.Attack_mu != 0)
+        {
+            EquipmentProperty["Attack_mu"] -= equip.Attack_mu;
+        }
+        if (equip.Defence_mu != 0)
+        {
+            EquipmentProperty["Defence_mu"] -= equip.Defence_mu;
+        }
+        if (equip.Attack_shui != 0)
+        {
+            EquipmentProperty["Attack_shui"] -= equip.Attack_shui;
+        }
+        if (equip.Defence_shui != 0)
+        {
+            EquipmentProperty["Defence_shui"] -= equip.Defence_shui;
+        }
+        if (equip.Attack_huo != 0)
+        {
+            EquipmentProperty["Attack_huo"] -= equip.Attack_huo;
+        }
+        if (equip.Defence_huo != 0)
+        {
+            EquipmentProperty["Defence_huo"] -= equip.Defence_huo;
+        }
+        if (equip.Attack_tu != 0)
+        {
+            EquipmentProperty["Attack_tu"] -= equip.Attack_tu;
+        }
+        if (equip.Defence_tu != 0)
+        {
+            EquipmentProperty["Defence_tu"] -= equip.Defence_tu;
+        }
+
+    }
+    private void AddEquipProperty()
+    {
+        MaxHp += EquipmentProperty["MaxHp"];
+        Charm += EquipmentProperty["Charm"];
+        Dingli += EquipmentProperty["Dingli"];
+        Luck += EquipmentProperty["Luck"];
+        Speed += EquipmentProperty["Speed"];
+        Attack += EquipmentProperty["Attack"];
+        Deffence += EquipmentProperty["Deffence"];
+        Hit += EquipmentProperty["Hit"];
+        Miss += EquipmentProperty["Miss"];
+        IncreaseHurt += EquipmentProperty["IncreaseHurt"];
+        ReduceHurt += EquipmentProperty["ReduceHurt"];
+        Attack_jin += EquipmentProperty["Attack_jin"];
+        Defence_jin += EquipmentProperty["Defence_jin"];
+        Attack_mu += EquipmentProperty["Attack_mu"];
+        Defence_mu += EquipmentProperty["Defence_mu"];
+        Attack_shui += EquipmentProperty["Attack_shui"];
+        Defence_shui += EquipmentProperty["Defence_shui"];
+        Attack_huo += EquipmentProperty["Attack_huo"];
+        Defence_huo += EquipmentProperty["Defence_huo"];
+        Attack_tu += EquipmentProperty["Attack_tu"];
+        Defence_tu += EquipmentProperty["Defence_tu"];
+
+
     }
 }
