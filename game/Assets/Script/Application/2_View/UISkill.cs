@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class UISkill : View
 {
     public GameObject GridGroup;
+    public Text NameText;
+    public Text PassiveText;
+    public Text ActiveText;
+
     public override string Name
     {
         get
@@ -40,16 +44,22 @@ public class UISkill : View
             string path2 = "Icon/Wx/" + skill.GetWxString();
             wx.sprite = Resources.Load<Sprite>(path2);
 
-
+            grid.GetComponent<SelectSkill>().SkillID = key;
         }
     }
 
+    void ShowSkillInfo(int id)
+    {
+        Skill skill = Game.Instance.StaticData.getSkill(id);
+        NameText.text = string.Format("<color={0}>{1}</color>", skill.GetQualityColor(), skill.name);
+        PassiveText.text = skill.passiveDes;
+        ActiveText.text = skill.initiativeDes;
+    }
 
     public override void RegisterEvents()
     {
         AttentionEvents.Add(Consts.E_EnterScene);
-        AttentionEvents.Add(Consts.E_AddItem);
-        AttentionEvents.Add(Consts.E_AddItemCount);
+        AttentionEvents.Add(Consts.E_ShowSkillInfo);
     }
 
     public override void HandleEvent(string eventName, object data)
@@ -61,6 +71,10 @@ public class UISkill : View
                 int scenceID = e.SceneIndex;
                 if (scenceID == 2)
                     initialize();
+                break;
+            case Consts.E_ShowSkillInfo:
+                int skillID = (int)data ;
+                ShowSkillInfo(skillID);
                 break;
 
         }     
