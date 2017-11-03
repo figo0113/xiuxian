@@ -54,6 +54,7 @@ public static class Consts
     public const string V_Skill = "V_Skill";
     public const string V_SelectSkill = "V_SelectSkill";
     public const string V_ItemUseButton = "V_ItemUseButton";
+    public const string V_TextManager = "V_TextManager";
     //Controller
     public const string E_StartUp = "E_StartUp";
     public const string E_SaveData = "E_SaveData";
