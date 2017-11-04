@@ -34,6 +34,7 @@ public class GameModel : Model
     public List<BackpackGrid> Backpack = new List<BackpackGrid>(); //背包数据
     public Dictionary<int, int> ItemCollect = new Dictionary<int, int>();
     public Dictionary<int,int>m_Skill = new Dictionary<int, int>(); //已经学习的技能  技能ID，技能等级
+    public List<int> FightSkill = new List<int>();//出战技能
     public Player player; //角色数据
 
     public string saveFileName;
