@@ -35,6 +35,7 @@ public class GameModel : Model
     public Dictionary<int, int> ItemCollect = new Dictionary<int, int>();
     public Dictionary<int,int>m_Skill = new Dictionary<int, int>(); //已经学习的技能  技能ID，技能等级
     public List<int> FightSkill = new List<int>();//出战技能
+
     public Player player; //角色数据
 
     public string saveFileName;
@@ -120,6 +121,9 @@ public class GameModel : Model
             ParseNPCJson(); //NPC初始化
             player = new Player("小小",1,80,100,15,100,80,80,1,50,0,100,40,9500,500,0,0,120,500,500);
             m_Skill.Add(1001,1);
+            m_Skill.Add(1002, 1);
+            FightSkill.Add(1001);
+            FightSkill.Add(1002);
         }
         else
         {

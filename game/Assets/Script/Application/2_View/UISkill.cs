@@ -11,6 +11,9 @@ public class UISkill : View
     public Text NameText;
     public Text PassiveText;
     public Text ActiveText;
+    public GameObject FightSkill;
+    public Transform[] SkillPos;
+
 
     public override string Name
     {
@@ -45,7 +48,9 @@ public class UISkill : View
             wx.sprite = Resources.Load<Sprite>(path2);
 
             grid.GetComponent<SelectSkill>().SkillID = key;
+            grid.transform.Find("Icon").GetComponent<DragSkill>().SkillID = key;
         }
+        ShowFightSkill();
     }
 
     void ShowSkillInfo(int id)
@@ -60,6 +65,32 @@ public class UISkill : View
     {
         AttentionEvents.Add(Consts.E_EnterScene);
         AttentionEvents.Add(Consts.E_ShowSkillInfo);
+        AttentionEvents.Add(Consts.E_AddFightSkill);
+    }
+
+    void ShowFightSkill()
+    {
+        GameModel gm = GetModel<GameModel>();
+        for(int i=0; i<gm.FightSkill.Count;i++)
+        {
+            GameObject skill = (GameObject)Instantiate(Resources.Load ("Prefab/SkillIcon"));
+            Image Icon = skill.GetComponent<Image>();
+            string path = "Icon/Skill/Skill_" + gm.FightSkill[i];
+            Icon.sprite = Resources.Load<Sprite>(path);
+            skill.transform.parent = FightSkill.transform;
+            skill.transform.position = SkillPos[i].position;
+        }
+    }
+
+    void AddFightSkill(int id)
+    {
+        GameModel gm = GetModel<GameModel>();
+        GameObject skill = (GameObject)Instantiate(Resources.Load("Prefab/SkillIcon"));
+        Image Icon = skill.GetComponent<Image>();
+        string path = "Icon/Skill/Skill_" + id;
+        Icon.sprite = Resources.Load<Sprite>(path);
+        skill.transform.parent = FightSkill.transform;
+        skill.transform.position = SkillPos[gm.FightSkill.Count].position;
     }
 
     public override void HandleEvent(string eventName, object data)
@@ -75,6 +106,10 @@ public class UISkill : View
             case Consts.E_ShowSkillInfo:
                 int skillID = (int)data ;
                 ShowSkillInfo(skillID);
+                break;
+            case Consts.E_AddFightSkill:
+                int id = (int)data;
+                AddFightSkill(id);
                 break;
 
         }     
