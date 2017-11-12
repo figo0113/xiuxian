@@ -12,9 +12,13 @@ public class UISkill : View
     public Text PassiveText;
     public Text ActiveText;
     public GameObject FightSkill;
+    public GameObject SkillIconPanel;
     public Transform[] SkillPos;
 
-
+    private float leftLimit;
+    private float rightLimit;
+    private float upLimit;
+    private float downLimit;
     public override string Name
     {
         get
@@ -23,6 +27,13 @@ public class UISkill : View
         }
     }
 
+    private void Start()
+    {
+        leftLimit = SkillPos[0].transform.position.x - 50;
+        rightLimit = SkillPos[4].transform.position.x + 50;
+        upLimit = SkillPos[0].transform.position.y + 50;
+        downLimit= SkillPos[0].transform.position.y - 50;
+    }
 
     void initialize()
     {
@@ -55,6 +66,7 @@ public class UISkill : View
 
     void ShowSkillInfo(int id)
     {
+
         Skill skill = Game.Instance.StaticData.getSkill(id);
         NameText.text = string.Format("<color={0}>{1}</color>", skill.GetQualityColor(), skill.name);
         PassiveText.text = skill.passiveDes;
@@ -66,31 +78,78 @@ public class UISkill : View
         AttentionEvents.Add(Consts.E_EnterScene);
         AttentionEvents.Add(Consts.E_ShowSkillInfo);
         AttentionEvents.Add(Consts.E_AddFightSkill);
+        AttentionEvents.Add(Consts.E_MoveFightSkill);
     }
 
     void ShowFightSkill()
     {
         GameModel gm = GetModel<GameModel>();
-        for(int i=0; i<gm.FightSkill.Count;i++)
+
+        for (int i = 0; i < SkillIconPanel.transform.childCount; i++)
+        {
+            Destroy(SkillIconPanel.transform.GetChild(i).gameObject);
+        }
+
+        for (int i=0; i<gm.FightSkill.Count;i++)
         {
             GameObject skill = (GameObject)Instantiate(Resources.Load ("Prefab/SkillIcon"));
             Image Icon = skill.GetComponent<Image>();
             string path = "Icon/Skill/Skill_" + gm.FightSkill[i];
             Icon.sprite = Resources.Load<Sprite>(path);
-            skill.transform.parent = FightSkill.transform;
+            skill.transform.parent = SkillIconPanel.transform;
             skill.transform.position = SkillPos[i].position;
+            skill.GetComponent<DragFightSkill>().SkillID = gm.FightSkill[i];
         }
     }
 
-    void AddFightSkill(int id)
+    void AddFightSkill(AddFightSkill e)
+    {
+        if (e.pos.x >= leftLimit && e.pos.x <= rightLimit && e.pos.y<= upLimit && e.pos.y>=downLimit)
+        {
+            GameModel gm = GetModel<GameModel>();
+            if (!gm.FightSkill.Contains(e.id) && gm.FightSkill.Count<=5 && gm.m_Skill.ContainsKey(e.id))
+            {
+                GameObject skill = (GameObject)Instantiate(Resources.Load("Prefab/SkillIcon"));
+                Image Icon = skill.GetComponent<Image>();
+                string path = "Icon/Skill/Skill_" + e.id;
+                Icon.sprite = Resources.Load<Sprite>(path);
+                skill.transform.parent = SkillIconPanel.transform;
+                skill.transform.position = SkillPos[gm.FightSkill.Count].position;
+                skill.GetComponent<DragFightSkill>().SkillID = e.id;
+                gm.FightSkill.Add(e.id);
+            }
+        }
+    }
+
+    void MoveFightSkill(AddFightSkill e)
     {
         GameModel gm = GetModel<GameModel>();
-        GameObject skill = (GameObject)Instantiate(Resources.Load("Prefab/SkillIcon"));
-        Image Icon = skill.GetComponent<Image>();
-        string path = "Icon/Skill/Skill_" + id;
-        Icon.sprite = Resources.Load<Sprite>(path);
-        skill.transform.parent = FightSkill.transform;
-        skill.transform.position = SkillPos[gm.FightSkill.Count].position;
+        if (e.pos.x >= leftLimit && e.pos.x <= rightLimit && e.pos.y <= upLimit && e.pos.y >= downLimit) //移动的位置在技能框内
+        {
+            float MinDistance = 100;
+            int targetIndex = 0;
+            
+            for (int i = 0; i < 5; i++) //找到最近的技能框
+            {
+                if (Vector2.Distance(e.pos, SkillPos[i].position) <= MinDistance)
+                {
+                    MinDistance = Vector2.Distance(e.pos, SkillPos[i].position);
+                    targetIndex = i;
+                }
+            }
+            if (gm.FightSkill.Count < targetIndex+1)
+            {
+                targetIndex = gm.FightSkill.Count - 1;
+            }
+            gm.FightSkill.Remove(e.id); 
+            gm.FightSkill.Insert(targetIndex, e.id);
+            ShowFightSkill();
+        }
+        else
+        {
+            gm.FightSkill.Remove(e.id);
+            ShowFightSkill();
+        }
     }
 
     public override void HandleEvent(string eventName, object data)
@@ -108,8 +167,12 @@ public class UISkill : View
                 ShowSkillInfo(skillID);
                 break;
             case Consts.E_AddFightSkill:
-                int id = (int)data;
-                AddFightSkill(id);
+                AddFightSkill addskill = data as AddFightSkill;
+                AddFightSkill(addskill);
+                break;
+            case Consts.E_MoveFightSkill:
+                AddFightSkill moveskill = data as AddFightSkill;
+                MoveFightSkill(moveskill);
                 break;
 
         }     

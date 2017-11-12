@@ -122,8 +122,8 @@ public class GameModel : Model
             player = new Player("小小",1,80,100,15,100,80,80,1,50,0,100,40,9500,500,0,0,120,500,500);
             m_Skill.Add(1001,1);
             m_Skill.Add(1002, 1);
-            FightSkill.Add(1001);
-            FightSkill.Add(1002);
+            //FightSkill.Add(1001);
+           // FightSkill.Add(1002);
         }
         else
         {
