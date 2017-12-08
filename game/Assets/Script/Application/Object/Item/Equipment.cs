@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Equipment : Item {
 
@@ -167,176 +168,14 @@ public class Equipment : Item {
     public override string GetPropertyText()
     {
         string propertyText = "";
-        int p_num = 0;
-        if(this.MaxHp!=0)
+        Dictionary<string, int> property = this.PropertyDic();
+        foreach(KeyValuePair<string,int>kp in property)
         {
-            if (p_num == 0)
-                propertyText += "气血+" + MaxHp;
+            if (propertyText == "")
+                propertyText += (kp.Key + "+" + kp.Value);
             else
-                propertyText += "\t气血+" + MaxHp;
-            p_num++;
+                propertyText += ("\t"+kp.Key + "+" + kp.Value);
         }
-        if (this.Charm != 0)
-        {
-            if (p_num == 0)
-                propertyText += "魅力+" + Charm;
-            else
-                propertyText += "\t魅力+" + Charm;
-            p_num++;
-        }
-        if (this.Dingli != 0)
-        {
-            if (p_num == 0)
-                propertyText += "定力+" + Dingli;
-            else
-                propertyText += "\t定力+" + Dingli;
-            p_num++;
-        }
-        if (this.Luck != 0)
-        {
-            if (p_num == 0)
-                propertyText += "福缘+" + Luck;
-            else
-                propertyText += "\t福缘+" + Luck;
-            p_num++;
-        }
-        if (this.Speed != 0)
-        {
-            if (p_num == 0)
-                propertyText += "速度+" + Speed;
-            else
-                propertyText += "\t速度+" + Speed;
-            p_num++;
-        }
-        if (this.Attack != 0)
-        {
-            if (p_num == 0)
-                propertyText += "攻击+" + Attack;
-            else
-                propertyText += "\t攻击+" + Attack;
-            p_num++;
-        }
-        if (this.Deffence != 0)
-        {
-            if (p_num == 0)
-                propertyText += "防御+" + Deffence;
-            else
-                propertyText += "\t防御+" + Deffence;
-            p_num++;
-        }
-        if (this.Hit != 0)
-        {
-            if (p_num == 0)
-                propertyText += "命中+" + Hit;
-            else
-                propertyText += "\t命中+" + Hit;
-            p_num++;
-        }
-        if (this.Miss != 0)
-        {
-            if (p_num == 0)
-                propertyText += "闪避+" + Miss;
-            else
-                propertyText += "\t闪避+" + Miss;
-            p_num++;
-        }
-        if (this.IncreaseHurt != 0)
-        {
-            if (p_num == 0)
-                propertyText += "破击+" + IncreaseHurt;
-            else
-                propertyText += "\t破击+" + IncreaseHurt;
-            p_num++;
-        }
-        if (this.ReduceHurt != 0)
-        {
-            if (p_num == 0)
-                propertyText += "免伤+" + ReduceHurt;
-            else
-                propertyText += "\t免伤+" + ReduceHurt;
-            p_num++;
-        }
-        if (this.Attack_jin != 0)
-        {
-            if (p_num == 0)
-                propertyText += "金攻+" + Attack_jin;
-            else
-                propertyText += "\t金攻+" + Attack_jin;
-            p_num++;
-        }
-        if (this.Defence_jin != 0)
-        {
-            if (p_num == 0)
-                propertyText += "金防+" + Defence_jin;
-            else
-                propertyText += "\t金防+" + Defence_jin;
-            p_num++;
-        }
-        if (this.Attack_mu != 0)
-        {
-            if (p_num == 0)
-                propertyText += "木攻+" + Attack_mu;
-            else
-                propertyText += "\t木攻+" + Attack_mu;
-            p_num++;
-        }
-        if (this.Defence_mu != 0)
-        {
-            if (p_num == 0)
-                propertyText += "木防+" + Defence_mu;
-            else
-                propertyText += "\t木防+" + Defence_mu;
-            p_num++;
-        }
-        if (this.Attack_shui != 0)
-        {
-            if (p_num == 0)
-                propertyText += "水攻+" + Attack_shui;
-            else
-                propertyText += "\t水攻+" + Attack_shui;
-            p_num++;
-        }
-        if (this.Defence_shui != 0)
-        {
-            if (p_num == 0)
-                propertyText += "水防+" + Defence_shui;
-            else
-                propertyText += "\t水防+" + Defence_shui;
-            p_num++;
-        }
-        if (this.Attack_huo != 0)
-        {
-            if (p_num == 0)
-                propertyText += "火攻+" + Attack_huo;
-            else
-                propertyText += "\t火攻+" + Attack_huo;
-            p_num++;
-        }
-        if (this.Defence_huo != 0)
-        {
-            if (p_num == 0)
-                propertyText += "火防+" + Defence_huo;
-            else
-                propertyText += "\t火防+" + Defence_huo;
-            p_num++;
-        }
-        if (this.Attack_tu != 0)
-        {
-            if (p_num == 0)
-                propertyText += "土攻+" + Attack_tu;
-            else
-                propertyText += "\t土攻+" + Attack_tu;
-            p_num++;
-        }
-        if (this.Defence_tu != 0)
-        {
-            if (p_num == 0)
-                propertyText += "土防+" + Defence_tu;
-            else
-                propertyText += "\t土防+" + Defence_tu;
-            p_num++;
-        }
-
         return propertyText;
     }
     public override string GetItemTypeText()
@@ -348,10 +187,10 @@ public class Equipment : Item {
                 equipType = "『武器』";
                 break;
             case EquipmentType.Headpiece:
-                equipType = "〖帽子〗";
+                equipType = "『帽子』";
                 break;
             case EquipmentType.Armor:
-                equipType = "〖衣服〗";
+                equipType = "『衣服』";
                 break;
             case EquipmentType.Boots:
                 equipType = "『靴子』";
@@ -361,5 +200,94 @@ public class Equipment : Item {
                 break;
         }
         return equipType;
+    }
+    public Dictionary<string,int> PropertyDic()
+    {
+        Dictionary<string, int> property = new Dictionary<string, int>();
+        if (this.MaxHp != 0)
+        {
+            property.Add("气血", this.MaxHp);
+        }
+        if (this.Charm != 0)
+        {
+            property.Add("魅力", this.Charm);
+        }
+        if (this.Dingli != 0)
+        {
+            property.Add("定力", this.Dingli);
+        }
+        if (this.Luck != 0)
+        {
+            property.Add("福缘", this.Luck);
+        }
+        if (this.Speed != 0)
+        {
+            property.Add("速度", this.Speed);
+        }
+        if (this.Attack != 0)
+        {
+            property.Add("攻击", this.Attack);
+        }
+        if (this.Deffence != 0)
+        {
+            property.Add("防御", this.Deffence);
+        }
+        if (this.Hit != 0)
+        {
+            property.Add("命中", this.Hit);
+        }
+        if (this.Miss != 0)
+        {
+            property.Add("闪避", this.Miss);
+        }
+        if (this.IncreaseHurt != 0)
+        {
+            property.Add("破击", this.IncreaseHurt);
+        }
+        if (this.ReduceHurt != 0)
+        {
+            property.Add("免伤", this.ReduceHurt);
+        }
+        if (this.Attack_jin != 0)
+        {
+            property.Add("金攻", this.Attack_jin);
+        }
+        if (this.Defence_jin != 0)
+        {
+            property.Add("金防", this.Defence_jin);
+        }
+        if (this.Attack_mu != 0)
+        {
+            property.Add("木攻", this.Attack_mu);
+        }
+        if (this.Defence_mu != 0)
+        {
+            property.Add("木防", this.Defence_mu);
+        }
+        if (this.Attack_shui != 0)
+        {
+            property.Add("水攻", this.Attack_shui);
+        }
+        if (this.Defence_shui != 0)
+        {
+            property.Add("水防", this.Defence_shui);
+        }
+        if (this.Attack_huo != 0)
+        {
+            property.Add("火攻", this.Attack_huo);
+        }
+        if (this.Defence_huo != 0)
+        {
+            property.Add("火防", this.Defence_huo);
+        }
+        if (this.Attack_tu != 0)
+        {
+            property.Add("土攻", this.Attack_tu);
+        }
+        if (this.Defence_tu != 0)
+        {
+            property.Add("土防", this.Defence_tu);
+        }
+        return property;
     }
 }

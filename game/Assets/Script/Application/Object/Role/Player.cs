@@ -624,27 +624,11 @@ public class Player:Role  {
     private void UpdateEquipProperty(Equipment equip,Equipment oldEquip=null)
     {
         //如果有旧装备，减去旧装备属性
-        string text_EquipPropertyAdd = "";
-        string text_EquipPropertyDeduct = "";
         if (oldEquip!=null)
         {
             if (oldEquip.MaxHp != 0)
             {
                 EquipmentProperty["MaxHp"] -= oldEquip.MaxHp;
-                if(equip.MaxHp-oldEquip.MaxHp>0)
-                {
-                    if (text_EquipPropertyAdd == "")
-                        text_EquipPropertyAdd += "生命+" + (equip.MaxHp - oldEquip.MaxHp).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n生命+" + (equip.MaxHp - oldEquip.MaxHp).ToString();
-                }
-                else
-                {
-                    if(text_EquipPropertyDeduct=="")
-                        text_EquipPropertyAdd += "生命" + (equip.MaxHp - oldEquip.MaxHp).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n生命" + (equip.MaxHp - oldEquip.MaxHp).ToString();
-                }
             }
             if (oldEquip.Charm != 0)
             {
@@ -669,20 +653,6 @@ public class Player:Role  {
             if (oldEquip.Deffence != 0)
             {
                 EquipmentProperty["Deffence"] -= oldEquip.Deffence;
-                if (equip.Deffence- oldEquip.Deffence > 0)
-                {
-                    if (text_EquipPropertyAdd == "")
-                        text_EquipPropertyAdd += "防御+" + (equip.Deffence - oldEquip.Deffence).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n防御+" + (equip.Deffence - oldEquip.Deffence).ToString();
-                }
-                else
-                {
-                    if (text_EquipPropertyDeduct == "")
-                        text_EquipPropertyAdd += "防御" + (equip.Deffence - oldEquip.Deffence).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n防御" + (equip.Deffence - oldEquip.Deffence).ToString();
-                }
             }
             if (oldEquip.Hit != 0)
             {
@@ -727,38 +697,10 @@ public class Player:Role  {
             if (oldEquip.Attack_huo != 0)
             {
                 EquipmentProperty["Attack_huo"] -= oldEquip.Attack_huo;
-                if (equip.Attack_huo - oldEquip.Attack_huo > 0)
-                {
-                    if (text_EquipPropertyAdd == "")
-                        text_EquipPropertyAdd += "火攻+" + (equip.Attack_huo - oldEquip.Attack_huo).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n火攻+" + (equip.Attack_huo - oldEquip.Attack_huo).ToString();
-                }
-                else
-                {
-                    if (text_EquipPropertyDeduct == "")
-                        text_EquipPropertyAdd += "火攻" + (equip.Attack_huo - oldEquip.Attack_huo).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n火攻" + (equip.Attack_huo - oldEquip.Attack_huo).ToString();
-                }
             }
             if (oldEquip.Defence_huo != 0)
             {
                 EquipmentProperty["Defence_huo"] -= oldEquip.Defence_huo;
-                if (equip.Defence_huo - oldEquip.Defence_huo > 0)
-                {
-                    if (text_EquipPropertyAdd == "")
-                        text_EquipPropertyAdd += "火防+" + (equip.Defence_huo - oldEquip.Defence_huo).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n火防+" + (equip.Defence_huo - oldEquip.Defence_huo).ToString();
-                }
-                else
-                {
-                    if (text_EquipPropertyDeduct == "")
-                        text_EquipPropertyAdd += "火防" + (equip.Defence_huo - oldEquip.Defence_huo).ToString();
-                    else
-                        text_EquipPropertyAdd += "\n火防" + (equip.Defence_huo - oldEquip.Defence_huo).ToString();
-                }
             }
             if (oldEquip.Attack_tu != 0)
             {
@@ -774,10 +716,6 @@ public class Player:Role  {
         if (equip.MaxHp != 0)
         {
             EquipmentProperty["MaxHp"] += equip.MaxHp;
-            if (text_EquipPropertyAdd == "")
-                text_EquipPropertyAdd += "生命+" + equip.MaxHp.ToString();
-            else
-                text_EquipPropertyAdd += "\n生命+" + equip.MaxHp.ToString();
         }
         if (equip.Charm != 0)
         {
@@ -802,10 +740,6 @@ public class Player:Role  {
         if (equip.Deffence != 0)
         {
             EquipmentProperty["Deffence"] += equip.Deffence;
-            if (text_EquipPropertyAdd == "")
-                text_EquipPropertyAdd += "防御+" + equip.Deffence.ToString();
-            else
-                text_EquipPropertyAdd += "\n防御+" + equip.Deffence.ToString();
         }
         if (equip.Hit != 0)
         {
@@ -854,10 +788,6 @@ public class Player:Role  {
         if (equip.Defence_huo != 0)
         {
             EquipmentProperty["Defence_huo"] += equip.Defence_huo;
-            if (text_EquipPropertyAdd == "")
-                text_EquipPropertyAdd += "火防+" + equip.Defence_huo.ToString();
-            else
-                text_EquipPropertyAdd += "\n火防+" + equip.Defence_huo.ToString();
         }
         if (equip.Attack_tu != 0)
         {
@@ -866,17 +796,6 @@ public class Player:Role  {
         if (equip.Defence_tu != 0)
         {
             EquipmentProperty["Defence_tu"] += equip.Defence_tu;
-        }
-        //显示文字
-        if(text_EquipPropertyAdd!=""&&text_EquipPropertyDeduct!="")
-        {
-            /*string textValue= string.Format("<color={0}>{1}</color>", "lime", text_EquipPropertyAdd)+"/n"+ string.Format("<color={0}>{1}</color>", "red", text_EquipPropertyDeduct);
-            GameObject propertyText = (GameObject)Instantiate(Resources.Load("Prefab/PromptText"));
-            propertyText.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-            propertyText.GetComponent<TextManager>().value = textValue;*/
-            //string textAdd= string.Format("<color={0}>{1}</color>", "lime", text_EquipPropertyAdd);
-            //string textDeduct = string.Format("<color={0}>{1}</color>", "red", text_EquipPropertyDeduct);
-
         }
   
 

@@ -239,8 +239,40 @@ public class GameModel : Model
         if (RemoveItem(equip.ID, 1))
         {
             Equipment oldequip = player.Equip(equip);
+            Dictionary<string, int> propertyList = equip.PropertyDic();
+            string testtext1 = "";
+            string testtext2 = "";
             if (oldequip != null)
-                PickupItem(equip.ID);
+            {
+                PickupItem(oldequip.ID);
+                foreach (KeyValuePair<string, int> kp in oldequip.PropertyDic())
+                {
+                    if (propertyList.ContainsKey(kp.Key))
+                        propertyList[kp.Key] -= kp.Value;
+                    else
+                        propertyList.Add(kp.Key, kp.Value);
+                }
+            }
+            foreach(KeyValuePair<string,int>kp in propertyList)
+            {
+                if(kp.Value>0)
+                {
+                    if (testtext1 == "")
+                        testtext1 += (kp.Key + "+" + kp.Value);
+                    else
+                        testtext1 += ("\n"+kp.Key + "+" + kp.Value);
+                }
+                else if(kp.Value<0)
+                {
+                    if (testtext2 == "")
+                        testtext2 += (kp.Key +  kp.Value);
+                    else
+                        testtext2 += ("\n" + kp.Key + kp.Value);
+                }
+            }
+            if(testtext2!="")
+                testtext1+= string.Format("<color={0}>{1}</color>", "red", testtext2);
+            SendEvent(Consts.E_MidTextShow, testtext1);
             return true;
         }
         else
@@ -255,9 +287,11 @@ public class GameModel : Model
             {
                 case 1://加经验
                     player.Exp += item.Value * num;
+                    SendEvent(Consts.E_MidTextShow, "经验+"+item.Value*num);
                     break;
                 case 2://加寿命
                     player.MaxAge += item.Value * num;
+                    SendEvent(Consts.E_MidTextShow, "寿命+" + item.Value * num);
                     break;
             }
             return true;
