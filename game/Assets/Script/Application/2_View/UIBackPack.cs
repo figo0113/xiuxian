@@ -27,7 +27,7 @@ public class UIBackPack : View
 
             Text nametxt = grid.transform.Find("Name").GetComponent<Text>();
             //nametxt.text = gridInfo.Item.Name;
-            nametxt.text = string.Format("<color={0}>{1}</color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name);
+            //nametxt.text = string.Format("<color={0}>{1}</color>", gridInfo.Item.GetQualityColor(), gridInfo.Item.Name);
 
             Text counttxt = grid.transform.Find("Count").GetComponent<Text>();
             counttxt.text = "数量："+gridInfo.Count.ToString();
@@ -106,6 +106,7 @@ public class UIBackPack : View
                 break;
             case Item.ItemType.Equipment:
                 useButtonText.text = "装备";
+                SendEvent(Consts.E_EquipUpdate);
                 break;
             case Item.ItemType.Material:
                 useButton.gameObject.SetActive(false);
@@ -122,12 +123,16 @@ public class UIBackPack : View
         Text counttxt = go.transform.Find("Count").GetComponent<Text>();
         //counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
         counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
+        if (gm.Backpack[index].Item.Type == Item.ItemType.Equipment)
+            SendEvent(Consts.E_EquipUpdate);
     }
 
     void RemoveItem(int index)
     {
         GameModel gm = GetModel<GameModel>();
         GameObject go = GridGroup.transform.GetChild(index).gameObject;
+        if (go.transform.Find("UseBtn/Text").GetComponent<Text>().text=="装备")
+            SendEvent(Consts.E_EquipUpdate);
         Destroy(go);
     }
 
@@ -138,6 +143,8 @@ public class UIBackPack : View
         Text counttxt = go.transform.Find("Count").GetComponent<Text>();
         //counttxt.text = (int.Parse(counttxt.text) + 1).ToString();
         counttxt.text = "数量：" + gm.Backpack[index].Count.ToString();
+        if (gm.Backpack[index].Item.Type == Item.ItemType.Equipment)
+            SendEvent(Consts.E_EquipUpdate);
     }
     void UseItem(int itemID)
     {

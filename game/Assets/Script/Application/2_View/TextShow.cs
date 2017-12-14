@@ -34,7 +34,6 @@ public class TextShow :View
         switch (eventName)
         {
             case Consts.E_MidTextShow:
-                Debug.Log("get text");
                 string textValue = (string)data;
                 MidTextShow(textValue);
                 break;

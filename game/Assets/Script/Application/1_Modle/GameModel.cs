@@ -205,8 +205,12 @@ public class GameModel : Model
     public bool RemoveItem(int id,int removeNum)
     {
 
-        if (ItemCollect[id] < removeNum)
+        if (!ItemCollect.ContainsKey(id)||ItemCollect[id] < removeNum)
+        {
+            SendEvent(Consts.E_MidTextShow, string.Format("<color={0}>{1}</color>", "red", "物品数量不足"));
             return false;
+        }
+            
         //Item targetItem = Game.Instance.StaticData.GetItem(id);
         //int itemRemoveNum = itemRemove[1];
 
@@ -218,8 +222,8 @@ public class GameModel : Model
                 if(Backpack[i].Count> removeNum)
                 {
                     Backpack[i].Count -= removeNum;
-                    //int[] message = new int[2] { i, itemRemoveNum };
                     SendEvent(Consts.E_RemoveItemCount, i);
+                    //int[] message = new int[2] { i, itemRemoveNum };
                     break;
                 }
                 else

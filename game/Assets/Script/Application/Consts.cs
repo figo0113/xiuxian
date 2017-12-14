@@ -57,6 +57,8 @@ public static class Consts
     public const string V_TextManager = "V_TextManager";
     public const string V_DragSkill = "V_DragSkill";
     public const string V_TextShow = "TextShow";
+    public const string V_EquipmentPanelInfo = "EquipmentPanelInfo";
+
 
     //Controller
     public const string E_StartUp = "E_StartUp";
@@ -82,6 +84,7 @@ public static class Consts
     public const string E_AddFightSkill = "E_AddFightSkill";
     public const string E_MoveFightSkill = "E_MoveFightSkill";
     public const string E_MidTextShow = "E_MidTextShow";
+    public const string E_EquipUpdate = "E_EquipUpdate";
     /*    public const string E_StartLevel = "E_StartLevel"; //StartLevelArgs
          public const string E_EndLevel = "E_EndLevel";//EndLevelArgs
 
