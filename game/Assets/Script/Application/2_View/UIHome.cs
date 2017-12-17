@@ -74,6 +74,10 @@ public class UIHome : View {
         gm.PickupItem(2);
         gm.PickupItem(3);
         gm.PickupItem(4);
+        gm.PickupItem(5);
+        gm.PickupItem(6);
+        gm.PickupItem(7);
+        gm.PickupItem(8);
         IOHelper.SetData(Consts.saveFileName, gm);
     }
     public void DazuoiClick() //打坐测试 获得道具2

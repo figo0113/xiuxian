@@ -55,5 +55,69 @@
     "value": 0,
 	"equipType":"Armor",
 	"equipProperty":[0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,20,0,0]
+  },
+
+   {
+    "id": 5,
+    "name": "君临修罗",
+    "type": "Equipment ",
+    "quality": "Artifact",
+    "description": "地府之主使用的武器，攻击国暴表",
+    "capacity": 6,
+    "buyPrice": 500,
+    "sellPrice": 50,
+    "sprite": "item_2",
+    "function": 0,
+    "value": 0,
+	"equipType":"Weapon",
+	"equipProperty":[0,0,0,0,0,999,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0]
+  },
+
+   {
+    "id": 6,
+    "name": "赤焰盔",
+    "type": "Equipment ",
+    "quality": "Epic",
+    "description": "太清门研制的火系防具，大量提升火系防御",
+    "capacity": 5,
+    "buyPrice": 500,
+    "sellPrice": 50,
+    "sprite": "item_2",
+    "function": 0,
+    "value": 0,
+	"equipType":"Headpiece",
+	"equipProperty":[0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0,15,0,0]
+  },
+
+   {
+    "id": 7,
+    "name": "赤焰鞋",
+    "type": "Equipment ",
+    "quality": "Epic",
+    "description": "太清门研制的火系防具，大量提升火系防御",
+    "capacity": 5,
+    "buyPrice": 500,
+    "sellPrice": 50,
+    "sprite": "item_2",
+    "function": 0,
+    "value": 0,
+	"equipType":"Boots",
+	"equipProperty":[0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,10,0,0]
+  },
+    
+	{
+    "id": 8,
+    "name": "苍梧戒",
+    "type": "Equipment ",
+    "quality": "Epic",
+    "description": "苍梧之树的果子炼制而成的戒指，大量提升木系属性",
+    "capacity": 5,
+    "buyPrice": 500,
+    "sellPrice": 50,
+    "sprite": "item_1",
+    "function": 0,
+    "value": 0,
+	"equipType":"Jewelry",
+	"equipProperty":[0,0,0,0,0,0,0,0,0,0,0,0,0,50,50,0,0,0,0,0,0]
   }
 ]

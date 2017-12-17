@@ -7,13 +7,8 @@ using System;
 public class TextManager : View
 {
     public string value;
-    private Vector3 mTarget;
-    private Vector3 mScreen;
+    public float moveSpeed = 5f;
 
-    public float textWidth = 100;
-    public float textHeight = 50;
-
-    private Vector2 mPoint;
     public float FreeTime = 1.5f;
 
     void Start()
@@ -27,7 +22,7 @@ public class TextManager : View
     void Update()
     {
         //使文本在垂直方向山产生一个偏移  
-        transform.Translate(Vector3.up * 0.5F * Time.deltaTime);
+        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
     }
     IEnumerator Free()
     {
