@@ -79,8 +79,13 @@ public class UIHome : View {
     public void DazuoiClick() //打坐测试 获得道具2
     {
         //GameModel gm = GetModel<GameModel>();
-        gm.PickupItem(2);
-        IOHelper.SetData(Consts.saveFileName, gm);
+        //gm.PickupItem(2);
+        //IOHelper.SetData(Consts.saveFileName, gm);
+        //gm.m_Skill[FightSkill(1)];
+        Monster monster1 = Game.Instance.StaticData.getMonster(1);
+        string formula = Game.Instance.StaticData.getSkill(gm.FightSkill[1]).formula;
+        double hurt = Formula.hurt(gm.player, monster1, formula, 1);
+        
     }
 
     public void PlayerClick()
