@@ -275,8 +275,7 @@ public class EquipmentPanelInfo : View, IPointerEnterHandler, IPointerExitHandle
             if (child.tag == "Armor")
             {
                 child.gameObject.SetActive(true);
-                if(child.name!= "Equipped")
-                    equipnum++;
+                equipnum++;
             }
         }
         if (equipnum == 0)
